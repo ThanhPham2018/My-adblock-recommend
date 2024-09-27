@@ -10,4 +10,5 @@ https://github.com/anudeepND/whitelist/tree/master/domains
 https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/whitelist.txt
 
 
-# blacklist/blocklist
+# blacklist/blocklist/Denylist 
+Denylist 
