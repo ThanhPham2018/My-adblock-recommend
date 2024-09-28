@@ -46,38 +46,20 @@ https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.
 ```
 # ---------------------------------------------------
 
-# yokoffing NextDNS-Config 
-https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file
-
-
-
-
-
-
 # NextDNS
+- [yokoffing NextDNS-Config ](https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file)
+- You can also check out Hagezi's own [recommendations](https://github.com/hagezi/dns-blocklists/tree/main#whatshouldiuse).
+- full nextdns [Blocklists](https://github.com/nextdns/blocklists/tree/main/blocklists)
 
-## nextdns [Blocklists](https://github.com/nextdns/blocklists/tree/main/blocklists)</sup></sup>
+## privacy
+### Which blocklist should I use?
+We recommend you **remove** the [NextDNS Ads & Trackers Blocklist](https://github.com/nextdns/blocklists/blob/main/blocklists/nextdns-recommended.json) and **add** the [minimum] number of useful lists.
+- HaGeZi Multi **NORMAL** && OISD && Adguard: Block tracker, ad, and badware requests without issues **[set-and-forget]**
+- HaGeZi Multi **PRO** && OISD && Adguard: Block more requests, usually without issues **(recommended)**
 
 ![Blocklist](images/nextDNSBlockList.png)
 
-[settings](images/nextDNSSettings.png)
-
-
-We recommend you **remove** the [NextDNS Ads & Trackers Blocklist](https://github.com/nextdns/blocklists/blob/main/blocklists/nextdns-recommended.json) and **add** the [minimum](https://www.reddit.com/r/nextdns/comments/1048xeg/do_you_use_nextdns_blocklist_as_the_primary/j33wnz2/?context=3) number of useful lists.
-
-### Which blocklist should I use?
-
-Here are the suggested blocklists, based on past issues and observations:
-
-|     **Blocklists**   |                              **Rationale**                                             |
-|:--------------------:|:--------------------------------------------------------------------------------------:|
-| HaGeZi - <br>Multi **NORMAL**<sup>[1](https://github.com/hagezi/dns-blocklists/blob/main/statistics.md#multi)</sup> <p><p>OISD</p> | Block tracker, ad, and badware requests without issues ([set-and-forget](https://glosbe.com/en/en/set-and-forget)). |
-| HaGeZi - <br>Multi **PRO**<sup>[2](https://github.com/hagezi/dns-blocklists/blob/main/statistics.md#pro)</sup> <p><p>OISD</p> | Block more requests, usually without issues (recommended). |
-
-You can also check out Hagezi's own [recommendations](https://github.com/hagezi/dns-blocklists/tree/main#whatshouldiuse).
-
-
-## Native Tracking Protection <sup><sup>[1](https://github.com/nextdns/native-tracking-domains/tree/main/domains)</sup></sup>
+### Native Tracking Protection 
 
 Add all the device brands you use.
 
@@ -93,6 +75,11 @@ Add all the device brands you use.
 	Sonos
 
 </details>
+
+## settings 
+![settings](images/nextDNSSettings.png)
+
+
 
 ***
 # FAQ :question:
