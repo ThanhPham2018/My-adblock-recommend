@@ -35,16 +35,16 @@ Configuration Profile
 
 **DNS over HTTPS** 
 Windows 11
-Open the **Settings** app.
-Go to **Network & internet**.
-Click on **Wi-Fi (or Ethernet)**.
-Click on **Hardware properties**, or ignore this step if you clicked on **Ethernet**.
-Click the **Edit** button next to **DNS server assignment**.
-Select **Manual**.
-Enable **IPv4**.
-Enter **45.90.28.0** as **Preferred DNS**, then select **On (manual template)** and enter **<YOUR Public DNS over HTTPS>**.
-Enter **45.90.30.0** as **Alternate DNS**, then select **On (manual template)** and enter **<YOUR Public DNS over HTTPS>**.
-Click Save.
+1. Open the **Settings** app.
+2. Go to **Network & internet**.
+3. Click on **Wi-Fi (or Ethernet)**.
+4. Click on **Hardware properties**, or ignore this step if you clicked on **Ethernet**.
+5. Click the **Edit** button next to **DNS server assignment**.
+6. Select **Manual**.
+7. Enable **IPv4**.
+7. Enter **45.90.28.0** as **Preferred DNS**, then select **On (manual template)** and enter **<YOUR Public DNS over HTTPS>**.
+9. Enter **45.90.30.0** as **Alternate DNS**, then select **On (manual template)** and enter **<YOUR Public DNS over HTTPS>**.
+10. Click Save.
 
 **YogaDNS**
 1. Install YogaDNS from https://yogadns.com
