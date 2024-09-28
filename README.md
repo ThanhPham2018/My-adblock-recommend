@@ -104,8 +104,8 @@ https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.
 ## privacy
 ### Which blocklist should I use?
 We recommend you **remove** the [NextDNS Ads & Trackers Blocklist](https://github.com/nextdns/blocklists/blob/main/blocklists/nextdns-recommended.json) and **add** the [minimum] number of useful lists.
-- HaGeZi Multi **NORMAL** && OISD && Adguard: Block tracker, ad, and badware requests without issues **[set-and-forget]**
-- HaGeZi Multi **PRO** && OISD && Adguard: Block more requests, usually without issues **(recommended)**
+- HaGeZi Multi **NORMAL** && **OISD** && **Adguard**: Block tracker, ad, and badware requests without issues **[set-and-forget]**
+- HaGeZi Multi **PRO** && **OISD** && **Adguard**: Block more requests, usually without issues **(recommended)**
 
 ![Blocklist](images/nextDNSBlockList.png)
 
