@@ -2,36 +2,24 @@
 thanhpn adblock 
 
 # hagezi Recommended
+
 ### Multi pro - Big broom: Extended protection (Recommended) : Full - Mini
-[📒 Multi PRO - Extended protection (Recommended)
-](https://github.com/hagezi/dns-blocklists/blob/main/README.md#pro
-)
+[📒 Multi PRO - Extended protection (Recommended)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#pro)
 
-[📒 Multi PRO mini (Recommended for browser/mobile adblockers)]([url](https://github.com/hagezi/dns-blocklists/blob/main/README.md#promini))
-```
-https://github.com/hagezi/dns-blocklists/blob/main/README.md#promini
-```
+[📒 Multi PRO mini (Recommended for browser/mobile adblockers)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#promini))
+
 ### Threat Intelligence Feeds - Increases security significantly! (Recommended) : Full - Medium - Mini - IPs
-🔐 Threat Intelligence Feeds - Increases security significantly! (Recommended)
-```
-https://github.com/hagezi/dns-blocklists/blob/main/README.md#tif
-```
-🔐 Threat Intelligence Feeds - Medium version (Recommended for browser/mobile adblockers)
-```
-https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifmedium
-```
-🔐 Threat Intelligence Feeds - Mini version
-```
-https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifmini
-```
-🔐 Threat Intelligence Feeds - IPs
 
-```
-https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifips
-```
+[🔐 Threat Intelligence Feeds - Increases security significantly! (Recommended)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tif)
+
+[🔐 Threat Intelligence Feeds - Medium version (Recommended for browser/mobile adblockers)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifmedium)
+
+[🔐 Threat Intelligence Feeds - Mini version](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifmini)
+
+[🔐 Threat Intelligence Feeds - IPs](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifips)
+
 ### Recommendation
-💡 Recommendation
-https://github.com/hagezi/dns-blocklists/blob/main/README.md#recommendation
+[💡 Recommendation](https://github.com/hagezi/dns-blocklists/blob/main/README.md#recommendation)
 
 
 # NextDNS/Adguard recommended
