@@ -21,20 +21,30 @@ thanhpn adblock
 ### Recommendation
 [💡 Recommendation](https://github.com/hagezi/dns-blocklists/blob/main/README.md#recommendation)
 
+# blacklist/blocklist/Denylist/whitelist 
 
-# NextDNS/Adguard recommended
+**Adguard blacklist/whitelist**
+[Adguard blacklist/whitelist](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md)
+
+**anudeepND whitelist**
+[anudeepND whitelist](https://github.com/anudeepND/whitelist/tree/master/domains)
+
+**hg1978 Whitelist**
+```
+https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/whitelist.txt
+```
+**facebook-whitelist**
+```
+https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.txt
+```
+
+
+# yokoffing NextDNS-Config 
 https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file
 
-https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md
-
-# whitelist
-https://github.com/anudeepND/whitelist/tree/master/domains
-
-https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/whitelist.txt
 
 
-# blacklist/blocklist/Denylist 
-Denylist 
+
 
 # ---------------------------------------------------
 
