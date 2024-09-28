@@ -46,7 +46,7 @@ https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.
 ```
 # ---------------------------------------------------
 
-# NextDNS
+# [NextDNS](https://nextdns.io/?from=87sa6ga4)
 - [yokoffing NextDNS-Config ](https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file)
 - You can also check out Hagezi's own [recommendations](https://github.com/hagezi/dns-blocklists/tree/main#whatshouldiuse).
 - full nextdns [Blocklists](https://github.com/nextdns/blocklists/tree/main/blocklists)
