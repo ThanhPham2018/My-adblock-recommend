@@ -1,3 +1,8 @@
+# mf-adblock
+```
+https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/mf-adblock.js
+```
+
 # translate page
 ```
 https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/TranslatePage.js
