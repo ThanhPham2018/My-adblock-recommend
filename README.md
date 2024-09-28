@@ -6,7 +6,8 @@ thanhpn adblock
 [📒 Multi PRO - Extended protection (Recommended)
 ](https://github.com/hagezi/dns-blocklists/blob/main/README.md#pro
 )
-📒 Multi PRO mini (Recommended for browser/mobile adblockers)
+
+[📒 Multi PRO mini (Recommended for browser/mobile adblockers)]([url](https://github.com/hagezi/dns-blocklists/blob/main/README.md#promini))
 ```
 https://github.com/hagezi/dns-blocklists/blob/main/README.md#promini
 ```
