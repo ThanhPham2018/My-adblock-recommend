@@ -7,3 +7,6 @@ https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1
 
 # Bypass Paywalls Clean - en
 https://gitflic.ru/project/magnolia1234/bypass-paywalls-clean-filters/blob/raw?file=userscript/bpc.en.user.js
+
+# readMedium
+https://raw.githubusercontent.com/ThanhPham2018/ThanhPN_adblock/refs/heads/main/scripts/readMedium.js
