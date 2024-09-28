@@ -47,8 +47,6 @@ https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.
 # ---------------------------------------------------
 
 # [NextDNS](https://nextdns.io/?from=87sa6ga4)
-- [yokoffing NextDNS-Config ](https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file)
-- You can also check out Hagezi's own [recommendations](https://github.com/hagezi/dns-blocklists/tree/main#whatshouldiuse).
 - full nextdns [Blocklists](https://github.com/nextdns/blocklists/tree/main/blocklists)
 
 ## privacy
@@ -103,18 +101,14 @@ At the end of the day, if you're using [NextDNS](https://nextdns.io/?from=87sa6g
 ***
 # Mentions :books:
 
-
 ### YouTube
 * [The ULTIMATE Guide to Mastering NextDNS!](https://www.youtube.com/watch?v=WUG57ynLb8I&t=2230s) | [clarifications](https://github.com/techlore/channel-content/issues/43) (July 2023) 
 
-### Articles
-* [Knot Resolver — with ad blocking](https://blog.cavelab.dev/2022/12/knot-resolver-ad-blocking/) (Dec 2022)
-* [Privacy Toolkit: NextDNS](https://stephenbolen.com/privacy-toolkit-nextdns/#:~:text=I%20found%20a%20wonderful%20guide%20on%20GitHub%20that%20walks%20through%20the%20optimal%20NextDNS%20configuration) (Sept 2022)
-
 ### Guides
-* [A comprehensive guide to setting up NextDNS](https://itsjake.me/blog/a-comprehensive-guide-to-setting-up-nextdns/) (Sept 2023)
-* [FMHY](https://github.com/fmhy) → The Largest Collection of Free Stuff On The Internet!
+* You can also check out Hagezi's own [recommendations](https://github.com/hagezi/dns-blocklists/tree/main#whatshouldiuse).
+* [yokoffing NextDNS-Config ](https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file)
 * [hagezi/dns-blocklists](https://github.com/hagezi/dns-blocklists#department_store-nextdns---limited-freepaid-) → Online DNS Services
+
 
 ### List 
 * [Hagezi](https://github.com/hagezi/dns-blocklists)
@@ -122,4 +116,4 @@ At the end of the day, if you're using [NextDNS](https://nextdns.io/?from=87sa6g
 * [Easylist](https://github.com/easylist/easylist)
 * [uBlock Origin](https://github.com/uBlockOrigin/uAssets)
 * [AdGuard](https://github.com/AdguardTeam/AdguardFilters)
-
+* [FMHY](https://github.com/fmhy) → The Largest Collection of Free Stuff On The Internet!
