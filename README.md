@@ -1,5 +1,5 @@
-# ThanhPN_adblock
-thanhpn adblock 
+# My adblock recommended
+My adblock recommended
 
 # ---------------------------------------------------
 # Public DNS over HTTPS
