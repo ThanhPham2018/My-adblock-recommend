@@ -26,9 +26,13 @@ thanhpn adblock
 
 [**hl2guide Adguard**](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md)
 
-```https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/base.txt```
+```
+https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/base.txt
+```
 
-```https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt```
+```
+https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt
+```
 
 [**anudeepND whitelist**](https://github.com/anudeepND/whitelist/blob/master/README.md)
 ```
