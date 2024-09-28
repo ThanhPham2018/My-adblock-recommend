@@ -60,6 +60,8 @@ https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file
 
 [Blocklist](https://prnt.sc/o-_GmWawFIyU)
 
+![Blocklist](https://prnt.sc/o-_GmWawFIyU)
+
 
 We recommend you **remove** the [NextDNS Ads & Trackers Blocklist](https://github.com/nextdns/blocklists/blob/main/blocklists/nextdns-recommended.json) and **add** the [minimum](https://www.reddit.com/r/nextdns/comments/1048xeg/do_you_use_nextdns_blocklist_as_the_primary/j33wnz2/?context=3) number of useful lists.
 
