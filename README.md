@@ -2,6 +2,22 @@
 thanhpn adblock 
 
 # ---------------------------------------------------
+# Public DNS over HTTPS
+
+[Publicly available servers](https://github.com/curl/curl/wiki/DNS-over-HTTPS)
+
+[Connect to public AdGuard DNS server](https://adguard-dns.io/en/public-dns.html)
+
+**Android**
+```
+**Private DNS**
+Android 9 or higher
+1. Go to Settings → Network & internet → Advanced → Private DNS.
+2. Select the Private DNS provider hostname option.
+3. Enter <YOUR_DNS> and hit Save.
+```
+
+# ---------------------------------------------------
 # Hagezi Recommended
 
 ### Multi pro - Big broom: Extended protection (Recommended) : Full - Mini
@@ -98,7 +114,7 @@ At the end of the day, if you're using [NextDNS](https://nextdns.io/?from=87sa6g
 
 
 
-***
+# ---------------------------------------------------
 # Mentions :books:
 
 ### YouTube
