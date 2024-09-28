@@ -1,6 +1,7 @@
 # ThanhPN_adblock
 thanhpn adblock 
 
+# ---------------------------------------------------
 # Hagezi Recommended
 
 ### Multi pro - Big broom: Extended protection (Recommended) : Full - Mini
@@ -21,14 +22,10 @@ thanhpn adblock
 ### Recommendation
 [💡 Recommendation](https://github.com/hagezi/dns-blocklists/blob/main/README.md#recommendation)
 
+# ---------------------------------------------------
 # blacklist/blocklist/Denylist/whitelist 
 
-
-[**hl2guide Adguard**](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md)
-
-```
-https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/base.txt
-```
+[**hl2guide Adguard whitelist**](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md)
 
 ```
 https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt
@@ -39,7 +36,7 @@ https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist
 https://raw.githubusercontent.com/anudeepND/whitelist/refs/heads/master/domains/whitelist.txt
 ```
 
-**hg1978 Whitelist**
+[**hg1978 Whitelist**](https://github.com/hg1978/AdGuard-Home-Whitelist)
 ```
 https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/whitelist.txt
 ```
@@ -47,7 +44,7 @@ https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/whitelist.txt
 ```
 https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.txt
 ```
-
+# ---------------------------------------------------
 
 # yokoffing NextDNS-Config 
 https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file
@@ -56,7 +53,6 @@ https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file
 
 
 
-# ---------------------------------------------------
 
 # NextDNS
 
