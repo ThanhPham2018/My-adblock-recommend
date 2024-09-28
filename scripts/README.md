@@ -1,7 +1,4 @@
-# bypass shortlink
-```
-https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.user.js
-```
+
 
 # AdGuard Popup Blocker
 ```
