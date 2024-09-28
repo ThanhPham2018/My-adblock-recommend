@@ -96,7 +96,7 @@ We based the recommendations below on a combination of effectiveness, resource e
 | Android | [Brave](https://www.privacyguides.org/en/mobile-browsers/#brave) | Built-in blocker |
 | Windows <br> macOS <br> Linux | [Firefox](https://www.mozilla.org/en-US/firefox/new/) (with [Betterfox](https://github.com/yokoffing/Betterfox#betterfox)) <p><p> [Brave](https://www.privacyguides.org/en/desktop-browsers/#brave) | [uBlock Origin](https://addons.mozilla.org/blog/ublock-origin-everything-you-need-to-know-about-the-ad-blocker/) <p><p> Built-in blocker or [uBlock Origin](https://addons.mozilla.org/blog/ublock-origin-everything-you-need-to-know-about-the-ad-blocker/) |  |
 
-At the end of the day, if you're using [NextDNS](https://nextdns.io/?from=xujj63g5) + any browser with an ad blocker, you have more coverage than most people.
+At the end of the day, if you're using [NextDNS](https://nextdns.io/?from=87sa6ga4) + any browser with an ad blocker, you have more coverage than most people.
 
 
 
