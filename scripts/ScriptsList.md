@@ -19,6 +19,11 @@ https://gitflic.ru/project/magnolia1234/bypass-paywalls-clean-filters/blob/raw?f
 ```
 
 # readMedium
+readMediumIncognito
+```
+https://raw.githubusercontent.com/ThanhPham2018/ThanhPN_adblock/refs/heads/main/scripts/readMediumIncognito.js
+```
+
 ```
 https://raw.githubusercontent.com/ThanhPham2018/ThanhPN_adblock/refs/heads/main/scripts/readMedium.js
 ```
