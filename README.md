@@ -9,13 +9,49 @@ thanhpn adblock
 [Connect to public AdGuard DNS server](https://adguard-dns.io/en/public-dns.html)
 
 **Android**
-```
-**Private DNS**
-Android 9 or higher
-1. Go to Settings → Network & internet → Advanced → Private DNS.
+
+<details>
+
+Private DNS
+**Android 9 or higher**
+1. Go to **Settings** → **Network & internet** → **Advanced** → **Private DNS**.
 2. Select the Private DNS provider hostname option.
-3. Enter <YOUR_DNS> and hit Save.
-```
+3. Enter **<YOUR_DNS>** and hit Save.
+
+</details>
+
+**iOS**
+
+<details>
+
+Configuration Profile
+**iOS 14 or higher**
+
+</details>
+
+**Windows**
+
+<details>
+
+**DNS over HTTPS** 
+Windows 11
+Open the **Settings** app.
+Go to **Network & internet**.
+Click on **Wi-Fi (or Ethernet)**.
+Click on **Hardware properties**, or ignore this step if you clicked on **Ethernet**.
+Click the **Edit** button next to **DNS server assignment**.
+Select **Manual**.
+Enable **IPv4**.
+Enter **45.90.28.0** as **Preferred DNS**, then select **On (manual template)** and enter **<YOUR Public DNS over HTTPS>**.
+Enter **45.90.30.0** as **Alternate DNS**, then select **On (manual template)** and enter **<YOUR Public DNS over HTTPS>**.
+Click Save.
+
+**YogaDNS**
+1. Install YogaDNS from https://yogadns.com
+2. Follow the instructions for NextDNS at https://yogadns.com/docs/nextdns and nextDNS Setup Guide.
+
+</details>
+
 
 # ---------------------------------------------------
 # Hagezi Recommended
