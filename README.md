@@ -23,11 +23,17 @@ thanhpn adblock
 
 # blacklist/blocklist/Denylist/whitelist 
 
-**Adguard blacklist/whitelist**
-[Adguard blacklist/whitelist](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md)
 
-**anudeepND whitelist**
-[anudeepND whitelist](https://github.com/anudeepND/whitelist/tree/master/domains)
+[**hl2guide Adguard**](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md)
+
+```https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/base.txt```
+
+```https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt```
+
+[**anudeepND whitelist**](https://github.com/anudeepND/whitelist/blob/master/README.md)
+```
+https://raw.githubusercontent.com/anudeepND/whitelist/refs/heads/master/domains/whitelist.txt
+```
 
 **hg1978 Whitelist**
 ```
