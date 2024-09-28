@@ -42,8 +42,8 @@ Windows 11
 5. Click the **Edit** button next to **DNS server assignment**.
 6. Select **Manual**.
 7. Enable **IPv4**.
-7. Enter **45.90.28.0** as **Preferred DNS**, then select **On (manual template)** and enter **<YOUR Public DNS over HTTPS>**.
-9. Enter **45.90.30.0** as **Alternate DNS**, then select **On (manual template)** and enter **<YOUR Public DNS over HTTPS>**.
+7. Enter **45.90.28.0** as **Preferred DNS**, then select **On (manual template)** and enter **<YOUR_DNS_over_HTTPS>**.
+9. Enter **45.90.30.0** as **Alternate DNS**, then select **On (manual template)** and enter **<YOUR_DNS_over_HTTPS>**.
 10. Click Save.
 
 **YogaDNS**
