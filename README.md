@@ -1,7 +1,7 @@
 # ThanhPN_adblock
 thanhpn adblock 
 
-# DNS 
+# hagezi Recommended
 ### Multi pro - Big broom: Extended protection (Recommended) : Full - Mini
 📒 Multi PRO - Extended protection (Recommended)
 ```
