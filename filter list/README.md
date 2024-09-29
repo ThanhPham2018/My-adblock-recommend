@@ -1,4 +1,4 @@
-# blacklist/blocklist/Denylist/
+# Blocklist/Denylist/
 ## Hagezi Recommended
 **Recommendation**
 [💡 Recommendation](https://github.com/hagezi/dns-blocklists/blob/main/README.md#recommendation)
