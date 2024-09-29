@@ -87,48 +87,7 @@ Windows 11
 </details>
 
 # ---------------------------------------------------
-# Hagezi Recommended
 
-### Multi pro - Big broom: Extended protection (Recommended) : Full - Mini
-[📒 Multi PRO - Extended protection (Recommended)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#pro)
-
-[📒 Multi PRO mini (Recommended for browser/mobile adblockers)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#promini))
-
-### Threat Intelligence Feeds - Increases security significantly! (Recommended) : Full - Medium - Mini - IPs
-
-[🔐 Threat Intelligence Feeds - Increases security significantly! (Recommended)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tif)
-
-[🔐 Threat Intelligence Feeds - Medium version (Recommended for browser/mobile adblockers)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifmedium)
-
-[🔐 Threat Intelligence Feeds - Mini version](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifmini)
-
-[🔐 Threat Intelligence Feeds - IPs](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifips)
-
-### Recommendation
-[💡 Recommendation](https://github.com/hagezi/dns-blocklists/blob/main/README.md#recommendation)
-
-# ---------------------------------------------------
-# blacklist/blocklist/Denylist/whitelist 
-
-[**hl2guide Adguard whitelist**](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md)
-
-```
-https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt
-```
-
-[**anudeepND whitelist**](https://github.com/anudeepND/whitelist/blob/master/README.md)
-```
-https://raw.githubusercontent.com/anudeepND/whitelist/refs/heads/master/domains/whitelist.txt
-```
-
-[**hg1978 Whitelist**](https://github.com/hg1978/AdGuard-Home-Whitelist)
-```
-https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/whitelist.txt
-```
-**facebook-whitelist**
-```
-https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.txt
-```
 ***
 # FAQ :question:
 
@@ -145,7 +104,6 @@ We based the recommendations below on a combination of effectiveness, resource e
 | Windows <br> macOS <br> Linux | [Firefox](https://www.mozilla.org/en-US/firefox/new/) (with [Betterfox](https://github.com/yokoffing/Betterfox#betterfox)) <p><p> [Brave](https://www.privacyguides.org/en/desktop-browsers/#brave) | [uBlock Origin](https://addons.mozilla.org/blog/ublock-origin-everything-you-need-to-know-about-the-ad-blocker/) <p><p> Built-in blocker or [uBlock Origin](https://addons.mozilla.org/blog/ublock-origin-everything-you-need-to-know-about-the-ad-blocker/) |  |
 
 At the end of the day, if you're using [NextDNS](https://nextdns.io/?from=87sa6ga4) + any browser with an ad blocker, you have more coverage than most people.
-
 
 
 # ---------------------------------------------------
