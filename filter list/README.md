@@ -30,7 +30,7 @@ https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20vers
 
 ## [my blocklist](https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/blacklist.txt)
 ```
-https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/blacklist.txt
+https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/68db4bd44821b0b81cfb7ac30613d5289e3e95b6/filter%20list/blacklist.txt
 ```
 
 
@@ -39,7 +39,7 @@ https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/
 
 [**my whitelist**](https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/whitelist.txt)
 ```
-https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/whitelist.txt
+https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/68db4bd44821b0b81cfb7ac30613d5289e3e95b6/filter%20list/whitelist.txt
 ```
 
 [**hl2guide**](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md) [**Adguard whitelist**](https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt)
