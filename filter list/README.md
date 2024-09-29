@@ -67,3 +67,7 @@ with **YogaDNS**, you can use both of DNS server and filter list
 # for Android
 
 use **"DNS66"** or **"Blokada"**
+
+# for iOS
+
+use **configuration profile** of **Adguard** or **nextDNS** as i [recommended](https://github.com/ThanhPham2018/My-adblock-recommend/blob/43c6cd71ebb329951ae6c794f371d5425e249e47/README.md)
