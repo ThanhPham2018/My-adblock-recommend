@@ -1,3 +1,7 @@
+# yogaDNS
+
+[yogaDNS](images/yogaDNS.jpg)
+
 # Hagezi Recommended
 
 ### Multi pro - Big broom: Extended protection (Recommended) : Full - Mini
