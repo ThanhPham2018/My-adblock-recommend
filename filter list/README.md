@@ -1,8 +1,7 @@
-# Blocklist/Denylist/
+# Blocklist/Denylist
 ## Hagezi Recommended
-**Recommendation**
-[💡 Recommendation](https://github.com/hagezi/dns-blocklists/blob/main/README.md#recommendation)
 
+[**💡 Recommendation**](https://github.com/hagezi/dns-blocklists/blob/main/README.md#recommendation)
 
 ### Multi pro - Big broom: Extended protection (Recommended) : Full - Mini
 [📒 Multi PRO - Extended protection (Recommended)](https://github.com/hagezi/dns-blocklists/blob/main/README.md#pro)
@@ -23,6 +22,8 @@
 ```
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt
 ```
+
+* full nextdns [Blocklists](https://github.com/nextdns/blocklists/tree/main/blocklists)
 
 # ---------------------------------------------------
 # whitelist 
