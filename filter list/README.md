@@ -1,6 +1,6 @@
 # yogaDNS
 
-![yogaDNS](images/yogaDNS.jpg)
+![yogaDNS](images/yogaDNS.jpg) 
 
 # Hagezi Recommended
 
