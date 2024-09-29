@@ -25,9 +25,9 @@ https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20vers
 ## Adguard 
 * [adguard-filters](https://adguard.com/kb/general/ad-filtering/adguard-filters/)
 
-my recommendation 
-
 <details>
+
+**my recommendation **
   
 * [Popups](https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_19_Annoyances_Popups/filter.txt)
 ```
