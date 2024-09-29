@@ -27,7 +27,7 @@ https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20vers
 
 <details>
 
-**my recommendation **
+### my recommendation 
   
 * [Popups](https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_19_Annoyances_Popups/filter.txt)
 ```
