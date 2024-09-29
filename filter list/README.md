@@ -19,7 +19,7 @@
 
 [🔐 Threat Intelligence Feeds - IPs](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifips)
 
-[AntiMalwareAdGuardHome](https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt)
+[Dandelion Sprout's Anti-Malware List](https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt)
 ```
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt
 ```
