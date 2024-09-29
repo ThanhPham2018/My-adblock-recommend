@@ -28,8 +28,19 @@ https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20vers
 ## Adguard 
 * [adguard-filters](https://adguard.com/kb/general/ad-filtering/adguard-filters/)
 
+## [my blocklist](https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/blacklist.txt)
+```
+https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/blacklist.txt
+```
+
+
 # ---------------------------------------------------
 # whitelist 
+
+[**my whitelist**](https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/whitelist.txt)
+```
+https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/whitelist.txt
+```
 
 [**hl2guide**](https://github.com/hl2guide/AdGuard-Home-Whitelist/blob/main/USAGE.md) [**Adguard whitelist**](https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt)
 
@@ -49,14 +60,6 @@ https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/whitelist.txt
 [**facebook-whitelist**](https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.txt)
 ```
 https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.txt
-```
-[**my blocklist**](https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/blacklist.txt)
-```
-https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/blacklist.txt
-```
-[**my whitelist**](https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/whitelist.txt)
-```
-https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/whitelist.txt
 ```
 
 
