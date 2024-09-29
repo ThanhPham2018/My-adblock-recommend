@@ -73,7 +73,7 @@ with **YogaDNS**, you can use both of DNS server and filter list
 
 # for Android
 
-use **"DNS66"** or **"Blokada"**
+[use **"DNS66"** or **"Blokada"**](https://github.com/bigdargon/hostsVN/wiki/Android)
 
 # for iOS
 
