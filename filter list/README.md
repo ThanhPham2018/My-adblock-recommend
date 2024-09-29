@@ -40,3 +40,12 @@ https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/whitelist.txt
 ```
 https://github.com/hg1978/AdGuard-Home-Whitelist/blob/master/facebook-whitelist.txt
 ```
+**my clocklist**
+```
+https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/blacklist.txt
+```
+**my whitelist**
+```
+https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/dns66/whitelist.txt
+```
+
