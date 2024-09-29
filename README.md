@@ -75,7 +75,7 @@ At the end of the day, if you're using [NextDNS](https://nextdns.io/?from=87sa6g
 * You can also check out Hagezi's own [recommendations](https://github.com/hagezi/dns-blocklists/tree/main#whatshouldiuse).
 * [yokoffing NextDNS-Config ](https://github.com/yokoffing/NextDNS-Config?tab=readme-ov-file)
 * [hagezi/dns-blocklists](https://github.com/hagezi/dns-blocklists#department_store-nextdns---limited-freepaid-) → Online DNS Services
-* [bigdargon hostsVN wiki](https://github.com/bigdargon/hostsVN/wiki)
+* Bigdargon hostsVN [wiki NextDNS](https://github.com/bigdargon/hostsVN/wiki/NextDNS)
 
 
 ### List 
