@@ -6,6 +6,31 @@ My adblock recommended
 
 [Connect to public AdGuard DNS server](https://adguard-dns.io/en/public-dns.html)
 
+<details>
+
+Select Private DNS provider hostname. Enter one of the servers below:
+
+**Default server**
+```
+dns.adguard-dns.com
+```
+AdGuard DNS will block ads and trackers.
+
+**Non-filtering server**
+```
+unfiltered.adguard-dns.com
+
+```
+AdGuard DNS will not block ads, trackers, or any other DNS requests.
+
+**Family protection server**
+```
+family.adguard-dns.com
+```
+AdGuard DNS will block ads, trackers, adult content, and enable Safe Search and Safe Mode, where possible.
+
+</details>
+
 [Avoid The Hack: 8 Best DNS Providers for Privacy (and adblocking)](https://avoidthehack.com/best-dns-privacy)
 
 [Publicly available servers](https://github.com/curl/curl/wiki/DNS-over-HTTPS)
