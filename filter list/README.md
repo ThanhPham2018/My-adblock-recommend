@@ -19,6 +19,11 @@
 
 [🔐 Threat Intelligence Feeds - IPs](https://github.com/hagezi/dns-blocklists/blob/main/README.md#tifips)
 
+[AntiMalwareAdGuardHome](https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt)
+```
+https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt
+```
+
 # ---------------------------------------------------
 # whitelist 
 
@@ -59,3 +64,6 @@ with **YogaDNS**, you can use both of DNS server and filter list
 
 ![yogaDNS settings](https://github.com/ThanhPham2018/My-adblock-recommend/blob/68e734ff1f71e32bbec05a9e1a7976bfaca4a4ab/images/yogaDNS.png)
 
+# for Android
+
+use **"DNS66"** or **"Blokada"**
