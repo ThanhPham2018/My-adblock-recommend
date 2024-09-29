@@ -4,11 +4,7 @@ My adblock recommended
 # ---------------------------------------------------
 # Public DNS over HTTPS
 
-[Connect to public AdGuard DNS server](https://adguard-dns.io/en/public-dns.html)
-
-<details>
-
-</details>
+[Connect to public AdGuard DNS server](https://adguard-dns.io/en/public-dns.html) **(Recommended)**
 
 [Avoid The Hack: 8 Best DNS Providers for Privacy (and adblocking)](https://avoidthehack.com/best-dns-privacy)
 
