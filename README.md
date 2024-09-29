@@ -42,43 +42,7 @@ Add all the device brands you use.
 ## settings 
 ![settings](images/nextDNSSettings.png)
 
-**Android**
-
-<details>
-
-Private DNS
-**Android 9 or higher**
-1. Go to **Settings** → **Network & internet** → **Advanced** → **Private DNS**.
-2. Select the Private DNS provider hostname option.
-3. Enter **<YOUR_DNS>** and hit Save.
-
 </details>
-
-**iOS**
-
-<details>
-
-Configuration Profile
-**iOS 14 or higher**
-
-</details>
-
-**Windows**
-
-<details>
-
-**DNS over HTTPS** 
-Windows 11
-1. Open the **Settings** app.
-2. Go to **Network & internet**.
-3. Click on **Wi-Fi (or Ethernet)**.
-4. Click on **Hardware properties**, or ignore this step if you clicked on **Ethernet**.
-5. Click the **Edit** button next to **DNS server assignment**.
-6. Select **Manual**.
-7. Enable **IPv4**.
-7. Enter **45.90.28.0** as **Preferred DNS**, then select **On (manual template)** and enter **<YOUR_DNS_over_HTTPS>**.
-9. Enter **45.90.30.0** as **Alternate DNS**, then select **On (manual template)** and enter **<YOUR_DNS_over_HTTPS>**.
-10. Click Save.
 
 **YogaDNS**
 1. Install YogaDNS from https://yogadns.com
