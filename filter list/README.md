@@ -1,4 +1,7 @@
-# yogaDNS
+# for Windows 
+
+**YogaDNS**
+1. Install YogaDNS from https://yogadns.com
 
 ![yogaDNS settings](https://github.com/ThanhPham2018/My-adblock-recommend/blob/68e734ff1f71e32bbec05a9e1a7976bfaca4a4ab/images/yogaDNS.png)
 
