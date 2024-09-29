@@ -22,8 +22,11 @@
 ```
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt
 ```
-
+## nextDNS 
 * full nextdns [Blocklists](https://github.com/nextdns/blocklists/tree/main/blocklists)
+
+## Adguard 
+* [adguard-filters](https://adguard.com/kb/general/ad-filtering/adguard-filters/)
 
 # ---------------------------------------------------
 # whitelist 
