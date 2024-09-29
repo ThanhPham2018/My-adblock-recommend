@@ -26,7 +26,9 @@ https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20vers
 * [adguard-filters](https://adguard.com/kb/general/ad-filtering/adguard-filters/)
 
 my recommendation 
+
 <details>
+  
 * [Popups](https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_19_Annoyances_Popups/filter.txt)
 ```
 https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_19_Annoyances_Popups/filter.txt
@@ -47,6 +49,7 @@ https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/fil
 ```
 https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_15_DnsFilter/filter.txt
 ```
+
 </details>
 
 ## nextDNS 
