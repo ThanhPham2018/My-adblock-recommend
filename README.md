@@ -6,6 +6,8 @@ My adblock recommended
 
 [Connect to public AdGuard DNS server](https://adguard-dns.io/en/public-dns.html)
 
+[Avoid The Hack: 8 Best DNS Providers for Privacy (and adblocking)](https://avoidthehack.com/best-dns-privacy)
+
 [Publicly available servers](https://github.com/curl/curl/wiki/DNS-over-HTTPS)
 
 
