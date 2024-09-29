@@ -48,13 +48,6 @@ Add all the device brands you use.
 ## settings 
 ![settings](images/nextDNSSettings.png)
 
-</details>
-
-**YogaDNS**
-1. Install YogaDNS from https://yogadns.com
-2. Follow the instructions for NextDNS at https://yogadns.com/docs/nextdns and nextDNS Setup Guide.
-
-</details>
 
 # ---------------------------------------------------
 
