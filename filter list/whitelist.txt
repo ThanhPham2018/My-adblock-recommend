@@ -241,3 +241,16 @@ youtube-nocookie.com
 yt3.ggpht.com
 zee.cws.conviva.com
 z-m-graph.facebook.com
+api.segment.io
+cdn.segment.com
+notify.bugsnag.com
+sessions.bugsnag.com
+auth.docker.io
+cdn.auth0.com
+login.docker.com
+desktop.docker.com
+hub.docker.com
+registry-1.docker.io
+production.cloudflare.docker.com
+docker-pinata-support.s3.amazonaws.com
+api.dso.docker.com
