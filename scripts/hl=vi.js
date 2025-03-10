@@ -10,6 +10,20 @@
 // @match        https://notebooklm.google.com/*
 // @match        https://aistudio.google.com/*
 // @match        https://gemini.google.com/*
+// @match        *://notebooklm.google.com*
+// @match        *://aistudio.google.com*
+// @match        *://gemini.google.com*
+// @match        *://iask.ai*
+// @match        *://you.com*
+// @match        *://www.genspark.ai*
+// @match        *://www.perplexity.ai*
+// @match        *://x.com*
+// @match        *://chatgpt.com*
+// @match        *://www.meta.ai*
+// @match        *://chat.qwen.ai*
+// @match        *://chat.deepseek.com*
+
+
 // @grant        none
 // ==/UserScript==
 
