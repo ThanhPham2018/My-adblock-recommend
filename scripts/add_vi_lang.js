@@ -1,31 +1,43 @@
 // ==UserScript==
-// @name         Thêm tham số ngôn ngữ tiếng Việt vào NotebookLM và AI Studio
+// @name         Thêm tham số ngôn ngữ tiếng Việt vào Google services
 // @namespace    http://tampermonkey.net/
 // @version      1.3
-// @description  Tự động thêm ?hl=vi vào URL khi truy cập NotebookLM và AI Studio, OK
+// @description  Tự động thêm ?hl=vi vào URL khi truy cập các dịch vụ của Google
 // @author       You
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/add_vi_lang.js
 // @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/add_vi_lang.js
 // @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
+// @match        *://*.google.com/*
 // @match        *://*.notebooklm.google.com/*
 // @match        *://*.aistudio.google.com/*
 // @match        *://*.gemini.google.com/*
-// @match        https://notebooklm.google.com/*
-// @match        https://aistudio.google.com/*
-// @match        https://gemini.google.com/*
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
+(function () {
+  "use strict";
+  
+  // Danh sách các domain không cần thêm tham số ngôn ngữ
+  const excludedDomains = [
+    'mail.google.com',
+    'calendar.google.com',
+    'drive.google.com',
+    'docs.google.com',
+    'meet.google.com'
+  ];
 
-    // Kiểm tra xem URL đã có tham số ?hl=vi chưa
-    if (!window.location.href.includes('?hl=vi') && !window.location.href.includes('&hl=vi')) {
-        // Thêm tham số ngôn ngữ vào URL
-        const separator = window.location.href.includes('?') ? '&' : '?';
-        const newUrl = window.location.href + separator + 'hl=vi';
+  // Kiểm tra xem domain hiện tại có nằm trong danh sách loại trừ không
+  if (excludedDomains.some(domain => window.location.hostname === domain)) {
+    return;
+  }
 
-        // Chuyển hướng đến URL mới với tham số ngôn ngữ tiếng Việt
-        window.location.href = newUrl;
-    }
+  // Kiểm tra và thêm tham số ngôn ngữ nếu chưa có
+  if (
+    !window.location.href.includes("?hl=vi") &&
+    !window.location.href.includes("&hl=vi")
+  ) {
+    const separator = window.location.href.includes("?") ? "&" : "?";
+    const newUrl = window.location.href + separator + "hl=vi";
+    window.location.href = newUrl;
+  }
 })();
