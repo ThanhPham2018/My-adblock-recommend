@@ -19,22 +19,49 @@
   function createSpeedControl() {
     const container = document.createElement("div");
     container.innerHTML = `
-          <div id="speed-control" style="
-              position: fixed;
-              top: 50px;
-              right: 20px;
-              background: rgba(0,0,0,0.8);
-              padding: 10px;
-              border-radius: 5px;
-              z-index: 9999;
-              color: white;
-          ">
-              <button id="toggle-speed">Speed: ${defaultSpeed}x</button>
-              <button id="speed-up">+</button>
-              <button id="speed-down">-</button>
-          </div>
-      `;
+        <div id="speed-control" style="
+            position: fixed;
+            top: 50px;
+            right: -80px; /* Ban đầu ẩn sang phải */
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 9999;
+            color: white;
+            transition: right 0.3s; /* Hiệu ứng transition */
+            display: flex;
+            gap: 5px;
+        ">
+            <button id="toggle-speed">Speed: ${defaultSpeed}x</button>
+            <button id="speed-up">+</button>
+            <button id="speed-down">-</button>
+        </div>
+    `;
     document.body.appendChild(container);
+
+    // Thêm xử lý hover
+    const speedControl = container.querySelector("#speed-control");
+
+    // Hiện khi hover vào vùng cạnh phải
+    const showZone = document.createElement("div");
+    showZone.style.cssText = `
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 50px;
+      height: 100vh;
+      z-index: 9998;
+    `;
+    document.body.appendChild(showZone);
+
+    showZone.addEventListener("mouseenter", () => {
+      speedControl.style.right = "20px";
+    });
+
+    // Ẩn khi rời khỏi control
+    speedControl.addEventListener("mouseleave", () => {
+      speedControl.style.right = "-80px";
+    });
 
     // Thêm sự kiện cho các nút
     document.getElementById("toggle-speed").onclick = toggleSpeedControl;
