@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name         Video URL Extractor
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Tự động lấy URL video và tạo lệnh ffmpeg
 // @author       You
-// @match        *://*/*
+// @match        https://*.microsoftstream.com/*
+// @match        https://*.sharepoint.com/*
+// @match        https://*.office.com/*
 // @grant        GM_setClipboard
 // ==/UserScript==
 
