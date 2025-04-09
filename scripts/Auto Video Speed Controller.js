@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Tự động điều chỉnh tốc độ video và thêm controls
-// @author       Your name
+// @author       ThanhPN
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
