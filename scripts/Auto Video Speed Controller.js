@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.11
 // @description  Tự động điều chỉnh tốc độ video và thêm controls
 // @author       ThanhPN
-// @match        *://*/*
+// @match        *://*.facebook.com/*
 // @grant        none
 // ==/UserScript==
 
@@ -22,7 +22,7 @@
         <div id="speed-control" style="
             position: fixed;
             top: 50px;
-            right: -80px; /* Ban đầu ẩn sang phải */
+            right: -100px; /* Ban đầu ẩn sang phải */
             background: rgba(0,0,0,0.8);
             padding: 10px;
             border-radius: 5px;
