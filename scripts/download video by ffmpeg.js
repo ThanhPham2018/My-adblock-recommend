@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @description  Tự động lấy URL video và tạo lệnh ffmpeg
-// @author       thanhpn
+// @author       ThanhPN
 // @match        https://*.microsoftstream.com/*
 // @match        https://*.sharepoint.com/*
 // @match        https://*.office.com/*
