@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Thêm tham số ngôn ngữ tiếng Việt vào Google services
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  Tự động thêm ?hl=vi vào URL khi truy cập các dịch vụ của Google
-// @author       You
+// @author       ThanhPN
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/add_vi_lang.js
 // @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/add_vi_lang.js
 // @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
