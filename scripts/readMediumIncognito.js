@@ -1,9 +1,12 @@
 // ==UserScript==
 // @name         Bypass Medium Paywall and Redirect in Incognito
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Bypass Medium paywalls, handle network issues, and redirect to subdomain if available in incognito mode.
-// @author       YourName
+// @author       ThanhPN
+// @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/readMediumIncognito.js
+// @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/readMediumIncognito.js
+// @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
 // @match        *://medium.com/*
 // @match        *://*.medium.com/*
 // @grant        none
