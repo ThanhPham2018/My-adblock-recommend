@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         mf-adblock
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  a basic anti-adblock workaround that can remove or click elements on a website with whitelist support
 // @author       ThanhPN
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/mf-adblock.js
 // @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/mf-adblock.js
 // @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
-// @match        https://*/*
+// @match        *://*/*
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
