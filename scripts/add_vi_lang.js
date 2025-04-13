@@ -7,8 +7,8 @@
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/add_vi_lang.js
 // @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/add_vi_lang.js
 // @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
-// @exclude     *://*accounts.google.com/*
-// @exclude     *://*firebase.google.com/*
+// @exclude        *://*accounts.google.com/*
+// @exclude        *://*firebase.google.com/*
 // @match        *://*.google.com/*
 // @match        *://*.notebooklm.google.com/*
 // @match        *://*.aistudio.google.com/*
