@@ -4,6 +4,9 @@
 // @version      2.0
 // @description  Gọi giao diện Google dịch để dịch toàn bộ trang web
 // @author       Gu Huatai
+// @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/TranslatePage.js
+// @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/TranslatePage.js
+// @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
 // @match        *://*/*
 // @grant        none
 // @run-at       document-end
