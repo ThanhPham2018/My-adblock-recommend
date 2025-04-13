@@ -1,9 +1,12 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.13
+// @version      1.14
 // @description  Tự động điều chỉnh tốc độ video và thêm controls
 // @author       ThanhPN
+// @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
+// @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
+// @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
