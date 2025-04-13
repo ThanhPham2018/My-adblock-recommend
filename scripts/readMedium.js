@@ -1,8 +1,11 @@
 // ==UserScript==
 // @name         Đọc Medium và các trang tương tự (Nâng cao)
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  Tự động chuyển hướng trang Medium và các trang tương tự sang các trang đọc thay thế
+// @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/readMedium.js
+// @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/readMedium.js
+// @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
 // @match        https://medium.com/*
 // @match        https://*.medium.com/*
 // @match        https://towardsdatascience.com/*
