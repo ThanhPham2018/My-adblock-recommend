@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Add language in Google services url
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.1
 // @description  Tự động thêm ?hl=vi vào URL khi truy cập các dịch vụ của Google, ngoại trừ các trang trong whitelist.
 // @author       ThanhPN
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/add_vi_lang.js
@@ -673,6 +673,10 @@
     "keep.google.com",
     "contacts.google.com",
     "translate.google.com",
+    "classroom.google.com",
+    "firebase.google.com",
+    "cloud.google.com",
+    "analytics.google.com",
   ]);
 
   // Tránh redirect loop bằng cách kiểm tra session storage
@@ -683,12 +687,8 @@
     return;
   }
 
-  // Kiểm tra và thêm tham số ngôn ngữ nếu chưa có
-  if (
-    !window.location.href.includes("?hl=vi") &&
-    !window.location.href.includes("&hl=vi") &&
-    !sessionStorage.getItem(REDIRECT_FLAG)
-  ) {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (!urlParams.has("hl") && !sessionStorage.getItem(REDIRECT_FLAG)) {
     // Đánh dấu đã thử redirect để tránh vòng lặp
     sessionStorage.setItem(REDIRECT_FLAG, "true");
 
@@ -703,5 +703,5 @@
   // Clear redirect flag sau 5 giây để cho phép thử lại nếu cần
   setTimeout(() => {
     sessionStorage.removeItem(REDIRECT_FLAG);
-  }, 5000);
+  }, 3000); // 3s thay vì 5s để trải nghiệm mượt hơn
 })();
