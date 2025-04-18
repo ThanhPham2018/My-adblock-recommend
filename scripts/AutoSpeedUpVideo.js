@@ -1,8 +1,10 @@
 // ==UserScript==
 // @name         Tăng tốc video tự động và điều khiển
 // @namespace    http://your.website.or.github/
-// @version      1.0
+// @version      1.1
 // @description  Tự động tăng tốc độ phát lại video trên các trang web và thêm bảng điều khiển '+' '-' '0' để tùy chỉnh tốc độ với bước nhảy 0.25x.
+// @downloadURL  https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/AutoSpeedUpVideo.js
+// @updateURL    https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/AutoSpeedUpVideo.js
 // @author       ThanhPN
 // @match        *://*/*
 // @grant        GM_addStyle
