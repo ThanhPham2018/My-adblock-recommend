@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.15
+// @version      1.16
 // @description  Tự động điều chỉnh tốc độ video và thêm controls
 // @author       ThanhPN
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -22,46 +22,61 @@
   function createSpeedControl() {
     const container = document.createElement("div");
     container.innerHTML = `
-        <div id="speed-control" style="
-            position: fixed;
-            top: 100px;
-            left: -80px; /* Ban đầu ẩn sang phải */
-            background: rgba(0,0,0,0.8);
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 9999;
-            color: white;
-            transition: left 0.3s; /* Hiệu ứng transition */
-            display: flex;
-            gap: 5px;
-        ">
-            <button id="toggle-speed">Speed: ${defaultSpeed}x</button>
-            <button id="speed-up">+</button>
-            <button id="speed-down">-</button>
-        </div>
-    `;
+          <div id="speed-control" style="
+              position: fixed;
+              bottom: 20px; /* Đổi từ top thành bottom */
+              left: -80px;
+              background: rgba(0,0,0,0.8);
+              padding: 10px;
+              border-radius: 5px;
+              z-index: 9999;
+              color: white;
+              transition: left 0.3s, opacity 0.3s; /* Thêm transition opacity */
+              display: none; /* Ẩn mặc định */
+              gap: 5px;
+          ">
+              <button id="toggle-speed">Speed: ${defaultSpeed}x</button>
+              <button id="speed-up">+</button>
+              <button id="speed-down">-</button>
+          </div>
+      `;
     document.body.appendChild(container);
 
-    // Thêm xử lý hover
     const speedControl = container.querySelector("#speed-control");
 
-    // Hiện khi hover vào vùng cạnh phải
+    // Hiện khi hover vào vùng bên trái
     const showZone = document.createElement("div");
     showZone.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 50px;
-      height: 100vh;
-      z-index: 9998;
-    `;
+        position: fixed;
+        bottom: 0; /* Đổi từ top thành bottom */
+        left: 0;
+        width: 50px;
+        height: 100px; /* Giảm chiều cao vùng hover */
+        z-index: 9998;
+      `;
     document.body.appendChild(showZone);
 
+    // Hiện control khi có video
+    function checkForVideos() {
+      const videos = getAllVideos();
+      if (videos.length > 0) {
+        speedControl.style.display = "flex";
+      } else {
+        speedControl.style.display = "none";
+      }
+    }
+
+    // Check videos khi load trang và mỗi 1s
+    checkForVideos();
+    setInterval(checkForVideos, 1000);
+
     showZone.addEventListener("mouseenter", () => {
-      speedControl.style.left = "20px";
+      if (getAllVideos().length > 0) {
+        // Chỉ hiện khi có video
+        speedControl.style.left = "20px";
+      }
     });
 
-    // Ẩn khi rời khỏi control
     speedControl.addEventListener("mouseleave", () => {
       speedControl.style.left = "-80px";
     });
