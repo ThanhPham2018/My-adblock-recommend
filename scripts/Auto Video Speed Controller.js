@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.14
+// @version      1.15
 // @description  Tự động điều chỉnh tốc độ video và thêm controls
 // @author       ThanhPN
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -25,13 +25,13 @@
         <div id="speed-control" style="
             position: fixed;
             top: 100px;
-            right: -80px; /* Ban đầu ẩn sang phải */
+            left: -80px; /* Ban đầu ẩn sang phải */
             background: rgba(0,0,0,0.8);
             padding: 10px;
             border-radius: 5px;
             z-index: 9999;
             color: white;
-            transition: right 0.3s; /* Hiệu ứng transition */
+            transition: left 0.3s; /* Hiệu ứng transition */
             display: flex;
             gap: 5px;
         ">
@@ -50,7 +50,7 @@
     showZone.style.cssText = `
       position: fixed;
       top: 0;
-      right: 0;
+      left: 0;
       width: 50px;
       height: 100vh;
       z-index: 9998;
@@ -58,12 +58,12 @@
     document.body.appendChild(showZone);
 
     showZone.addEventListener("mouseenter", () => {
-      speedControl.style.right = "20px";
+      speedControl.style.left = "20px";
     });
 
     // Ẩn khi rời khỏi control
     speedControl.addEventListener("mouseleave", () => {
-      speedControl.style.right = "-80px";
+      speedControl.style.left = "-80px";
     });
 
     // Thêm sự kiện cho các nút
