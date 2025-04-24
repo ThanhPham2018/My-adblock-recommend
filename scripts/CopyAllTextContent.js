@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy All Text Content
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Copy toàn bộ nội dung text từ transcript
 // @author       ThanhPN
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/CopyAllTextContent.js
@@ -195,11 +195,20 @@
         return;
       }
 
+      // Format timestamp: YYYYMMDD_HHMMSS
+      const timestamp = new Date()
+        .toISOString()
+        .replace(/[-:]/g, "")
+        .replace(/\..+/, "")
+        .replace("T", "_");
+
+      const filename = `${timestamp}.txt`;
+
       const blob = new Blob([allText], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "content_" + new Date().toISOString().slice(0, 10) + ".txt";
+      a.download = filename;
       a.click();
       URL.revokeObjectURL(url);
     } catch (error) {
