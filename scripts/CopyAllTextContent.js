@@ -76,4 +76,4 @@
   // Đăng ký menu commands
   GM_registerMenuCommand("📋 Copy Text", copyToClipboard);
   GM_registerMenuCommand("💾 Export to TXT", exportToFile);
-})();
+})(); 
