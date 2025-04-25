@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Copy All NotebookLM Content
+// @name         Copy NotebookLM Text Content
 // @namespace    http://tampermonkey.net/
 // @version      0.3
 // @description  Copy toàn bộ nội dung text từ transcript
@@ -16,19 +16,60 @@
   "use strict";
 
   function getAllContent() {
-    const activeContainer = document.querySelector(
-      '[class^="panel-content source-panel-view-content"]'
-    );
+    // Thử nhiều selectors khác nhau
+    const selectors = [
+      '[class^="panel-content source-panel-view-content"]',
+      '[class*="panel-content"]',
+      '[class*="conversation-"]',
+      '[role="main"]',
+      "main",
+      "#content",
+    ];
+
+    let activeContainer = null;
+
+    // Tìm container đầu tiên tồn tại và có nội dung
+    for (const selector of selectors) {
+      const container = document.querySelector(selector);
+      if (container && container.textContent?.trim()) {
+        activeContainer = container;
+        break;
+      }
+    }
+
     if (!activeContainer) {
       console.warn("Không tìm thấy panel content");
       return null;
     }
 
-    const textElements = activeContainer.querySelectorAll("*");
-    return Array.from(textElements)
-      .filter((el) => el.textContent?.trim())
+    // Lọc các elements chứa nội dung text
+    const textElements = Array.from(
+      activeContainer.querySelectorAll("*")
+    ).filter((el) => {
+      // Chỉ lấy các elements hiển thị và có text
+      const style = window.getComputedStyle(el);
+      return (
+        el.textContent?.trim() &&
+        style.display !== "none" &&
+        style.visibility !== "hidden" &&
+        !el.closest('[aria-hidden="true"]')
+      );
+    });
+
+    // Loại bỏ các elements trùng lặp và join text
+    const uniqueTexts = new Set();
+    const content = textElements
       .map((el) => el.textContent.trim())
+      .filter((text) => {
+        if (!uniqueTexts.has(text)) {
+          uniqueTexts.add(text);
+          return true;
+        }
+        return false;
+      })
       .join("\n");
+
+    return content || null;
   }
 
   async function copyToClipboard() {
@@ -79,4 +120,4 @@
   // Đăng ký menu commands
   GM_registerMenuCommand("📋 Copy Text", copyToClipboard);
   GM_registerMenuCommand("💾 Export to TXT", exportToFile);
-})(); 
+})();
