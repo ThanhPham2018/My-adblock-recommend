@@ -4,6 +4,9 @@
 // @version      0.2
 // @description  Copy chat content to markdown format
 // @author       ThanhPN
+// @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/CopyAllStudioContent.js
+// @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/CopyAllStudioContent.js
+// @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
 // @match        https://aistudio.google.com/*
 // @grant        GM_setClipboard
 // @grant        GM_registerMenuCommand
