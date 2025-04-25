@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Copy All Text Content
+// @name         Copy All NotebookLM Content
 // @namespace    http://tampermonkey.net/
 // @version      0.3
 // @description  Copy toàn bộ nội dung text từ transcript
