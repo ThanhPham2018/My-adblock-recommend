@@ -4,6 +4,9 @@
 // @version      0.3
 // @description  Copy toàn bộ nội dung text từ transcript
 // @author       ThanhPN
+// @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/CopyAllNotebookLMContent.js
+// @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/CopyAllNotebookLMContent.js
+// @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
 // @match        https://notebooklm.google.com/*
 // @grant        GM_registerMenuCommand
 // @run-at       document-end
