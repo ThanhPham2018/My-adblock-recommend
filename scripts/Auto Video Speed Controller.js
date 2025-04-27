@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.17
+// @version      1.18
 // @description  Tự động điều chỉnh tốc độ video và thêm controls (Optimized)
 // @author       ThanhPN
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -117,46 +117,59 @@
   // Tạo control panel và các thành phần UI
   function createSpeedControl() {
     const container = document.createElement("div");
-    container.innerHTML = `
-          <div id="speed-control-container" style="position: fixed; bottom: 0; left: 0; width: 0; height: 0; z-index: 9998;">
-              <div id="speed-control-show-zone" style="
-                  position: absolute;
-                  bottom: 0;
-                  left: 0;
-                  width: 50px; /* Vùng hover để hiện controls */
-                  height: 100px;
-                  cursor: pointer; /* Thêm con trỏ để biết là có thể tương tác */
-                  /* background: rgba(255,0,0,0.1); */ /* Bỏ comment để debug vùng hover */
-              "></div>
-              <div id="speed-control-panel" style="
-                  position: absolute;
-                  bottom: 20px;
-                  left: -100px; /* Tăng khoảng cách ẩn */
-                  background: rgba(0,0,0,0.8);
-                  padding: 8px; /* Giảm padding */
-                  border-radius: 5px;
-                  z-index: 9999;
-                  color: white;
-                  display: none; /* Ẩn mặc định, sẽ được checkAndToggleControlVisibility() quản lý */
-                  flex-direction: row; /* Đảm bảo các nút nằm ngang */
-                  gap: 5px;
-                  transition: left 0.3s ease-in-out;
-              ">
-                  <button id="speed-control-toggle" style="padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;">Speed: ${defaultSpeed}x</button>
-                  <button id="speed-control-up" style="padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;">+</button>
-                  <button id="speed-control-down" style="padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;">-</button>
-              </div>
-          </div>
-      `;
+
+    // Tạo container chính
+    const controlContainer = document.createElement("div");
+    controlContainer.id = "speed-control-container";
+    controlContainer.style.cssText =
+      "position: fixed; bottom: 0; left: 0; width: 0; height: 0; z-index: 9998;";
+
+    // Tạo show zone
+    const showZone = document.createElement("div");
+    showZone.id = "speed-control-show-zone";
+    showZone.style.cssText =
+      "position: absolute; bottom: 0; left: 0; width: 50px; height: 100px; cursor: pointer;";
+
+    // Tạo panel
+    const panel = document.createElement("div");
+    panel.id = "speed-control-panel";
+    panel.style.cssText =
+      "position: absolute; bottom: 20px; left: -100px; background: rgba(0,0,0,0.8); padding: 8px; border-radius: 5px; z-index: 9999; color: white; display: none; flex-direction: row; gap: 5px; transition: left 0.3s ease-in-out;";
+
+    // Tạo các buttons
+    const toggleBtn = document.createElement("button");
+    toggleBtn.id = "speed-control-toggle";
+    toggleBtn.textContent = `Speed: ${defaultSpeed}x`;
+    toggleBtn.style.cssText =
+      "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
+
+    const upBtn = document.createElement("button");
+    upBtn.id = "speed-control-up";
+    upBtn.textContent = "+";
+    upBtn.style.cssText =
+      "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
+
+    const downBtn = document.createElement("button");
+    downBtn.id = "speed-control-down";
+    downBtn.textContent = "-";
+    downBtn.style.cssText =
+      "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
+
+    // Ghép các elements lại
+    panel.appendChild(toggleBtn);
+    panel.appendChild(upBtn);
+    panel.appendChild(downBtn);
+    controlContainer.appendChild(showZone);
+    controlContainer.appendChild(panel);
+    container.appendChild(controlContainer);
     document.body.appendChild(container);
 
-    // Cache elements sau khi tạo
-    const controlContainer = document.getElementById("speed-control-container");
-    speedControlElement = document.getElementById("speed-control-panel");
-    showZoneElement = document.getElementById("speed-control-show-zone");
-    toggleSpeedButton = document.getElementById("speed-control-toggle");
-    speedUpButton = document.getElementById("speed-control-up");
-    speedDownButton = document.getElementById("speed-control-down");
+    // Cache elements
+    speedControlElement = panel;
+    showZoneElement = showZone;
+    toggleSpeedButton = toggleBtn;
+    speedUpButton = upBtn;
+    speedDownButton = downBtn;
 
     // --- Gắn sự kiện cho UI ---
     showZoneElement.addEventListener("mouseenter", () => {
