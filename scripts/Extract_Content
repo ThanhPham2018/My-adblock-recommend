@@ -33,13 +33,17 @@
         if (!container) return '';
 
         const seen = new Set();
-        const fragments = Array.from(container.querySelectorAll('[data-start-index]'))
+        const fragments = Array.from(container.querySelectorAll('[data-start-index], p, li'))
             .filter(el => !el.classList.contains('citation-marker'))
-            .sort((a, b) => parseInt(a.dataset.startIndex) - parseInt(b.dataset.startIndex))
+            .sort((a, b) => {
+                const aIdx = parseInt(a.dataset.startIndex || '0');
+                const bIdx = parseInt(b.dataset.startIndex || '0');
+                return aIdx - bIdx;
+            })
             .map(el => {
-                const bullet = el.parentElement.querySelector('.bullet')?.textContent?.trim();
-                const indent = parseFloat(el.style.paddingInlineStart || 0);
-                const level = Math.round(indent / 1.25); // dynamic level
+                const bullet = el.parentElement?.classList.contains('ql-editor') ? '' : el.parentElement?.querySelector('.bullet')?.textContent?.trim();
+                const indentMatch = el.className.match(/ql-indent-(\d+)/);
+                const level = indentMatch ? parseInt(indentMatch[1]) : 0;
 
                 const clone = el.cloneNode(true);
                 cleanParagraph(clone);
@@ -49,13 +53,12 @@
                         const text = strong.textContent;
                         strong.replaceWith(`**${text}**`);
                     });
-
                     const tabs = '\t'.repeat(level);
                     const line = `${tabs}${bullet ? bullet + ' ' : ''}${clone.textContent.trim()}`;
                     return seen.has(line) ? '' : (seen.add(line), line);
                 } else {
                     const div = document.createElement('div');
-                    div.style.marginLeft = `${indent}rem`;
+                    div.style.marginLeft = `${level * 1.25}rem`;
                     if (bullet) {
                         const b = document.createElement('span');
                         b.style.marginRight = '0.5rem';
@@ -117,4 +120,10 @@
             alert('✅ Đã copy nội dung chat.');
         }
     });
+
+    // QL Editor Panel
+    GM_registerMenuCommand("📋 [QL-Editor] Copy HTML", () => handlePanelCommand('.ql-editor', 'html', 'copy'));
+    GM_registerMenuCommand("📝 [QL-Editor] Copy Markdown", () => handlePanelCommand('.ql-editor', 'markdown', 'copy'));
+    GM_registerMenuCommand("⬇️ [QL-Editor] Tải Markdown", () => handlePanelCommand('.ql-editor', 'markdown', 'download', 'ql_editor_note.md'));
+
 })();
