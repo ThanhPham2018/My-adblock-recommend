@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NotebookLM Copier
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  Copy nội dung NotebookLM
 // @author       ThanhPN
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/NotebookLMCopier.js
