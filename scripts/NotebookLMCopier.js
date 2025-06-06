@@ -23,6 +23,89 @@
   GM_registerMenuCommand("Copy phần tóm tắt", copySummaryPanel);
 
     GM_registerMenuCommand("Copy phần tóm tắt (giữ định dạng)", copySummaryPanelWithStyle);
+    GM_registerMenuCommand("Tải phần tóm tắt (giữ định dạng)", downloadSummaryPanelWithStyle);
+    GM_registerMenuCommand("Tải phần tóm tắt (PDF)", downloadSummaryPanelAsPDF);
+    GM_registerMenuCommand("Tải phần tóm tắt (TXT)", downloadSummaryPanelAsTXT);
+
+function downloadSummaryPanelAsTXT() {
+  const summaryPanel = document.querySelector(".ql-editor");
+  if (!summaryPanel) return showNotification("Không tìm thấy nội dung tóm tắt!");
+
+  const markdownContent = convertToMarkdown(summaryPanel);
+  if (!markdownContent) return;
+
+  const blob = new Blob([markdownContent], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "notebook-summary.txt";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  showNotification("Đã tải phần tóm tắt dưới dạng file .txt!");
+}
+
+
+function downloadSummaryPanelAsPDF() {
+  const summaryPanel = document.querySelector(".ql-editor");
+  if (!summaryPanel) return showNotification("Không tìm thấy nội dung tóm tắt!");
+  const markdownContent = extractMarkdownWithStyle(summaryPanel);
+  if (!markdownContent) return;
+
+  // Tạo nội dung HTML cơ bản từ markdown (đơn giản hóa để in PDF)
+  const htmlContent = markdownContent
+    .replace(/^###### (.*$)/gim, "<h6>$1</h6>")
+    .replace(/^##### (.*$)/gim, "<h5>$1</h5>")
+    .replace(/^#### (.*$)/gim, "<h4>$1</h4>")
+    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+    .replace(/\*\*(.*?)\*\*/gim, "<strong>$1</strong>")
+    .replace(/\*(.*?)\*/gim, "<em>$1</em>")
+    .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2">$1</a>')
+    .replace(/\n/g, "<br>");
+
+  const win = window.open("", "_blank");
+  win.document.write(`
+    <html>
+      <head>
+        <title>Notebook Summary PDF</title>
+        <style>
+          body { font-family: Arial, sans-serif; padding: 40px; line-height: 1.6; }
+          h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+          a { color: #0645ad; }
+        </style>
+      </head>
+      <body>${htmlContent}</body>
+    </html>
+  `);
+  win.document.close();
+  win.focus();
+  win.print(); // Mở hộp thoại in để người dùng lưu PDF
+  showNotification("Đang chuẩn bị nội dung PDF, vui lòng chọn 'Lưu dưới dạng PDF'!");
+}
+
+
+function downloadSummaryPanelWithStyle() {
+  const summaryPanel = document.querySelector(".ql-editor");
+  if (!summaryPanel) return showNotification("Không tìm thấy nội dung tóm tắt!");
+  const markdownContent = extractMarkdownWithStyle(summaryPanel);
+  if (markdownContent) {
+    const blob = new Blob([markdownContent], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "notebook-summary.md";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showNotification("Đã tải nội dung tóm tắt dưới dạng file .md!");
+  }
+}
+
+
 
   function showNotification(message) {
     const notification = document.createElement("div");
