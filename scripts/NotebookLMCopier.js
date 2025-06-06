@@ -49,29 +49,31 @@
 
   function extractMarkdownWithStyle(element) {
     function processNode(node) {
-      if (node.nodeType === Node.TEXT_NODE) return node.textContent;
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        let tag = node.tagName.toLowerCase();
-        let children = Array.from(node.childNodes).map(processNode).join("");
+  if (node.nodeType === Node.TEXT_NODE) return node.textContent;
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    let tag = node.tagName.toLowerCase();
+    let children = Array.from(node.childNodes).map(processNode).join("");
 
-        if (tag === "b" || tag === "strong" || getComputedStyle(node).fontWeight >= 600) {
-          return `**${children.trim()}**`;
-        }
-
-        if (tag === "i" || tag === "em" || getComputedStyle(node).fontStyle === "italic") {
-          return `*${children.trim()}*`;
-        }
-
-        if (tag === "a" && node.href) {
-          return `[${children.trim()}](${node.href})`;
-        }
-
-        if (tag === "br") return `  \n`;
-
-        return children;
-      }
-      return "";
+    if (tag === "b" || tag === "strong" || getComputedStyle(node).fontWeight >= 600) {
+      // Chèn khoảng trắng nếu phần tiếp theo không phải là dấu câu
+      return `**${children.trim()}** `;
     }
+
+    if (tag === "i" || tag === "em" || getComputedStyle(node).fontStyle === "italic") {
+      return `*${children.trim()}* `;
+    }
+
+    if (tag === "a" && node.href) {
+      return `[${children.trim()}](${node.href}) `;
+    }
+
+    if (tag === "br") return `  \n`;
+
+    return children;
+  }
+  return "";
+}
+
 
     let output = "";
     element.childNodes.forEach((block) => {
