@@ -15,7 +15,7 @@
   "use strict";
 
   // --- Biến trạng thái và cấu hình ---
-  let defaultSpeed = 2.0;
+  let defaultSpeed = 1.75;
   let isEnabled = true;
   const LISTENER_ATTRIBUTE = "data-speed-listener-added"; // Thuộc tính để đánh dấu listener đã được thêm
 
