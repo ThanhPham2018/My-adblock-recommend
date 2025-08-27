@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.18
-// @description  Tự động điều chỉnh tốc độ video và thêm controls (Optimized)
-// @author       ThanhPN
-// @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
-// @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
-// @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
+// @version      1.19
+// @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+/)
+// @author       ThanhPN (mod by request)
+// @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
+// @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
+// @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
@@ -134,7 +134,7 @@
     const panel = document.createElement("div");
     panel.id = "speed-control-panel";
     panel.style.cssText =
-      "position: absolute; bottom: 20px; left: -100px; background: rgba(0,0,0,0.8); padding: 8px; border-radius: 5px; z-index: 9999; color: white; display: none; flex-direction: row; gap: 5px; transition: left 0.3s ease-in-out;";
+      "position: absolute; bottom: 50px; left: -100px; background: rgba(0,0,0,0.8); padding: 8px; border-radius: 5px; z-index: 9999; color: white; display: none; flex-direction: row; gap: 5px; transition: left 0.3s ease-in-out;";
 
     // Tạo các buttons
     const toggleBtn = document.createElement("button");
@@ -237,6 +237,37 @@
   observer.observe(document.body, {
     childList: true,
     subtree: true,
+  });
+
+  // --- Hotkeys ---
+  // Shift + .  => tăng tốc 0.25x
+  // Shift + ,  => giảm tốc 0.25x
+  // Shift + /  => bật/tắt auto speed
+  // Lưu ý: dùng e.code để ổn định giữa layout bàn phím, và bỏ qua khi đang gõ trong input/textarea/contenteditable
+  document.addEventListener("keydown", (e) => {
+    if (!e.shiftKey) return; // chỉ xử lý khi giữ Shift
+
+    const target = e.target || {};
+    const tag = (target.tagName || "").toLowerCase();
+    const isEditable = target.isContentEditable || tag === "input" || tag === "textarea" || tag === "select";
+    if (isEditable) return; // không bắt phím khi đang gõ
+
+    switch (e.code) {
+      case "Period": // phím .
+        adjustSpeed(0.25);
+        e.preventDefault();
+        break;
+      case "Comma": // phím ,
+        adjustSpeed(-0.25);
+        e.preventDefault();
+        break;
+      case "Slash": // phím /
+        toggleSpeedControl();
+        e.preventDefault();
+        break;
+      default:
+        break;
+    }
   });
 
   // Không cần setInterval(applySpeedToVideos, 2000) nữa
