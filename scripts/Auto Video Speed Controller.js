@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.21
+// @version      1.22
 // @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+/). Bản tối ưu hiệu năng (no setInterval, hotkeys throttle)
 // @author       ThanhPN (mod by request)
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
 // @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
 // @homepageURL     https://github.com/ThanhPham2018/My-adblock-recommend/tree/main/scripts
 // @match        *://*/*
+// @exclude      https://tv.garden/*
 // @grant        none
 // ==/UserScript==
 
