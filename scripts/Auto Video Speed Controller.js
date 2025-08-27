@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.20
-// @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+/)
+// @version      1.21
+// @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+/). Bản tối ưu hiệu năng (no setInterval, hotkeys throttle)
 // @author       ThanhPN (mod by request)
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
 // @updateURL       https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -17,7 +17,7 @@
   // --- Biến trạng thái và cấu hình ---
   let defaultSpeed = 1.5;
   let isEnabled = true;
-  const LISTENER_ATTRIBUTE = "data-speed-listener-added"; // Thuộc tính để đánh dấu listener đã được thêm
+  const LISTENER_ATTRIBUTE = "data-speed-listener-added"; // Đánh dấu video đã gắn listener
 
   // --- Cache DOM Elements ---
   let speedControlElement = null;
@@ -26,59 +26,72 @@
   let speedDownButton = null;
   let showZoneElement = null;
 
-  // --- Hàm xử lý chính ---
-
-  // Lấy tất cả video elements hiện có
-  function getAllVideos() {
-    return document.querySelectorAll(`video:not([${LISTENER_ATTRIBUTE}])`); // Chỉ lấy video chưa có listener
+  // --- Utils hiệu năng ---
+  const raf = window.requestAnimationFrame || ((cb) => setTimeout(cb, 16));
+  let visibilityRafQueued = false;
+  function scheduleVisibilityCheck() {
+    if (visibilityRafQueued) return;
+    visibilityRafQueued = true;
+    raf(() => {
+      visibilityRafQueued = false;
+      checkAndToggleControlVisibility();
+    });
   }
+
+  function throttle(fn, wait) {
+    let last = 0; let timer = null; let lastArgs; 
+    return function throttled(...args) {
+      const now = Date.now();
+      lastArgs = args;
+      const remaining = wait - (now - last);
+      if (remaining <= 0) {
+        last = now;
+        fn.apply(this, lastArgs);
+      } else if (!timer) {
+        timer = setTimeout(() => {
+          timer = null; last = Date.now();
+          fn.apply(this, lastArgs);
+        }, remaining);
+      }
+    };
+  }
+
+  // --- Hàm xử lý chính ---
 
   // Áp dụng tốc độ và thêm listener cho một video cụ thể
   function applySpeedToVideo(video) {
-    if (!video || video.hasAttribute(LISTENER_ATTRIBUTE)) return; // Bỏ qua nếu không phải video hoặc đã có listener
+    if (!video || video.hasAttribute(LISTENER_ATTRIBUTE)) return;
 
-    if (isEnabled) {
-      video.playbackRate = defaultSpeed;
-    } else {
-      video.playbackRate = 1; // Reset nếu đang tắt
-    }
+    video.playbackRate = isEnabled ? defaultSpeed : 1;
 
-    // Thêm listener để giữ speed khi video load lại hoặc bị thay đổi từ bên ngoài
     video.addEventListener("ratechange", handleRateChange);
-    video.setAttribute(LISTENER_ATTRIBUTE, "true"); // Đánh dấu đã thêm listener
+    video.setAttribute(LISTENER_ATTRIBUTE, "true");
   }
 
   // Xử lý sự kiện ratechange
   function handleRateChange(event) {
     const video = event.target;
-    // Chỉ can thiệp nếu script đang bật và tốc độ hiện tại khác tốc độ mong muốn
     if (isEnabled && video.playbackRate !== defaultSpeed) {
-      // Dùng setTimeout nhỏ để tránh xung đột với các script khác hoặc hành động của người dùng
-      setTimeout(() => {
-        // Kiểm tra lại isEnabled phòng trường hợp người dùng tắt ngay sau khi ratechange xảy ra
-        if (isEnabled) {
-          video.playbackRate = defaultSpeed;
-        }
-      }, 0);
+      setTimeout(() => { if (isEnabled) video.playbackRate = defaultSpeed; }, 0);
     }
   }
 
-  // Áp dụng tốc độ cho tất cả video hiện có (thường dùng khi bật/tắt hoặc thay đổi tốc độ)
+  // Áp dụng tốc độ cho tất cả video hiện có
   function applySpeedToAllExistingVideos() {
-    const videos = document.querySelectorAll("video"); // Lấy tất cả video, kể cả đã có listener
-    videos.forEach((video) => {
-      if (isEnabled) {
-        if (video.playbackRate !== defaultSpeed) {
-          video.playbackRate = defaultSpeed;
-        }
-      } else {
-        if (video.playbackRate !== 1) {
-          video.playbackRate = 1;
-        }
-      }
-      // Đảm bảo listener được gắn nếu chưa có (trường hợp video có sẵn trước khi script chạy)
-      if (!video.hasAttribute(LISTENER_ATTRIBUTE)) {
-        applySpeedToVideo(video);
+    document.querySelectorAll("video").forEach((video) => {
+      const targetRate = isEnabled ? defaultSpeed : 1;
+      if (video.playbackRate !== targetRate) video.playbackRate = targetRate;
+      if (!video.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToVideo(video);
+    });
+  }
+
+  // Chỉ áp dụng cho video "liên quan" (đang phát hoặc sẵn sàng)
+  function applySpeedToActiveVideos() {
+    document.querySelectorAll("video").forEach((video) => {
+      if (!isEnabled) return; // chỉ dùng khi đang bật
+      if (!video.paused || video.readyState > 0) {
+        if (video.playbackRate !== defaultSpeed) video.playbackRate = defaultSpeed;
+        if (!video.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToVideo(video);
       }
     });
   }
@@ -86,28 +99,28 @@
   // Cập nhật hiển thị nút toggle
   function updateToggleButton() {
     if (toggleSpeedButton) {
-      toggleSpeedButton.textContent = isEnabled
-        ? `Speed: ${defaultSpeed}x`
-        : "Speed: OFF";
+      toggleSpeedButton.textContent = isEnabled ? `Speed: ${defaultSpeed}x` : "Speed: OFF";
     }
   }
 
   // Điều chỉnh speed
   function adjustSpeed(change) {
-    if (!isEnabled) return; // Không làm gì nếu đang tắt
+    if (!isEnabled) return;
     defaultSpeed = Math.min(Math.max(defaultSpeed + change, 0.25), 16);
     updateToggleButton();
-    applySpeedToAllExistingVideos(); // Áp dụng tốc độ mới cho tất cả video
+    // Chỉ cập nhật video đang phát/sẵn sàng để nhẹ hơn
+    applySpeedToActiveVideos();
   }
 
-  // Bật/tắt điều khiển speed
+  // Bật/tắt điều khiển speed (Shift+/ cũng reset về defaultSpeed)
   function toggleSpeedControl() {
     isEnabled = !isEnabled;
     if (isEnabled) {
       defaultSpeed = 1.5; // reset về defaultSpeed khi bật lại
     }
     updateToggleButton();
-    applySpeedToAllExistingVideos(); // Áp dụng trạng thái mới (speed hoặc 1x)
+    // Toggle không diễn ra liên tục, có thể áp dụng cho toàn bộ cho chắc chắn
+    applySpeedToAllExistingVideos();
   }
 
   // Kiểm tra sự tồn tại của video để ẩn/hiện control panel
@@ -124,39 +137,33 @@
     // Tạo container chính
     const controlContainer = document.createElement("div");
     controlContainer.id = "speed-control-container";
-    controlContainer.style.cssText =
-      "position: fixed; bottom: 0; left: 0; width: 0; height: 0; z-index: 9998;";
+    controlContainer.style.cssText = "position: fixed; bottom: 0; left: 0; width: 0; height: 0; z-index: 9998;";
 
     // Tạo show zone
     const showZone = document.createElement("div");
     showZone.id = "speed-control-show-zone";
-    showZone.style.cssText =
-      "position: absolute; bottom: 0; left: 0; width: 50px; height: 100px; cursor: pointer;";
+    showZone.style.cssText = "position: absolute; bottom: 0; left: 0; width: 50px; height: 100px; cursor: pointer;";
 
     // Tạo panel
     const panel = document.createElement("div");
     panel.id = "speed-control-panel";
-    panel.style.cssText =
-      "position: absolute; bottom: 50px; left: -100px; background: rgba(0,0,0,0.8); padding: 8px; border-radius: 5px; z-index: 9999; color: white; display: none; flex-direction: row; gap: 5px; transition: left 0.3s ease-in-out;";
+    panel.style.cssText = "position: absolute; bottom: 50px; left: -100px; background: rgba(0,0,0,0.8); padding: 8px; border-radius: 5px; z-index: 9999; color: white; display: none; flex-direction: row; gap: 5px; transition: left 0.3s ease-in-out;";
 
     // Tạo các buttons
     const toggleBtn = document.createElement("button");
     toggleBtn.id = "speed-control-toggle";
     toggleBtn.textContent = `Speed: ${defaultSpeed}x`;
-    toggleBtn.style.cssText =
-      "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
+    toggleBtn.style.cssText = "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
 
     const upBtn = document.createElement("button");
     upBtn.id = "speed-control-up";
     upBtn.textContent = "+";
-    upBtn.style.cssText =
-      "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
+    upBtn.style.cssText = "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
 
     const downBtn = document.createElement("button");
     downBtn.id = "speed-control-down";
     downBtn.textContent = "-";
-    downBtn.style.cssText =
-      "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
+    downBtn.style.cssText = "padding: 5px 8px; border: none; background-color: #555; color: white; border-radius: 3px; cursor: pointer;";
 
     // Ghép các elements lại
     panel.appendChild(toggleBtn);
@@ -177,12 +184,10 @@
     // --- Gắn sự kiện cho UI ---
     showZoneElement.addEventListener("mouseenter", () => {
       if (speedControlElement.style.display === "flex") {
-        // Chỉ hiện nếu panel đang được phép hiển thị (có video)
         speedControlElement.style.left = "10px"; // Hiện panel
       }
     });
 
-    // Sử dụng container bao ngoài để bắt mouseleave, tránh việc rời chuột từ nút ra khoảng trống giữa các nút làm ẩn panel
     controlContainer.addEventListener("mouseleave", () => {
       speedControlElement.style.left = "-100px"; // Ẩn panel
     });
@@ -191,45 +196,33 @@
     speedUpButton.onclick = () => adjustSpeed(0.25);
     speedDownButton.onclick = () => adjustSpeed(-0.25);
 
-    // Kiểm tra video ban đầu và định kỳ để ẩn/hiện control panel
+    // Kiểm tra video ban đầu (không dùng setInterval nữa)
     checkAndToggleControlVisibility();
-    setInterval(checkAndToggleControlVisibility, 1500); // Giảm tần suất kiểm tra một chút
   }
 
   // --- Observer để theo dõi video mới ---
   const observer = new MutationObserver((mutationsList) => {
+    let needVisibilityUpdate = false;
     for (const mutation of mutationsList) {
-      if (mutation.type === "childList") {
-        mutation.addedNodes.forEach((node) => {
-          // Kiểm tra node được thêm trực tiếp
-          if (node.nodeName === "VIDEO") {
-            applySpeedToVideo(node);
-            checkAndToggleControlVisibility(); // Cập nhật hiển thị control panel khi có video mới
-          }
-          // Kiểm tra các node con nếu node được thêm là một element khác
-          else if (node.nodeType === Node.ELEMENT_NODE) {
-            node
-              .querySelectorAll(`video:not([${LISTENER_ATTRIBUTE}])`)
-              .forEach((video) => {
-                applySpeedToVideo(video);
-              });
-            // Nếu tìm thấy video con thì cũng cập nhật hiển thị control panel
-            if (node.querySelector("video")) {
-              checkAndToggleControlVisibility();
-            }
-          }
-        });
-        // Kiểm tra nếu video bị xóa khỏi DOM thì cũng cập nhật visibility
-        mutation.removedNodes.forEach((node) => {
-          if (
-            node.nodeName === "VIDEO" ||
-            (node.nodeType === Node.ELEMENT_NODE && node.querySelector("video"))
-          ) {
-            checkAndToggleControlVisibility();
-          }
-        });
-      }
+      if (mutation.type !== "childList") continue;
+
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeName === "VIDEO") {
+          applySpeedToVideo(node);
+          needVisibilityUpdate = true;
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          node.querySelectorAll(`video:not([${LISTENER_ATTRIBUTE}])`).forEach(applySpeedToVideo);
+          if (node.querySelector && node.querySelector("video")) needVisibilityUpdate = true;
+        }
+      });
+
+      mutation.removedNodes.forEach((node) => {
+        if (node.nodeName === "VIDEO" || (node.nodeType === Node.ELEMENT_NODE && node.querySelector && node.querySelector("video"))) {
+          needVisibilityUpdate = true;
+        }
+      });
     }
+    if (needVisibilityUpdate) scheduleVisibilityCheck();
   });
 
   // --- Khởi tạo ---
@@ -237,15 +230,15 @@
   applySpeedToAllExistingVideos(); // Áp dụng tốc độ cho video có sẵn khi script chạy
 
   // Bắt đầu observe body cho các thay đổi con và trong cây con
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
+  observer.observe(document.body, { childList: true, subtree: true });
 
   // --- Hotkeys ---
-  // Shift + .  => tăng tốc 0.25x
-  // Shift + ,  => giảm tốc 0.25x
+  // Shift + .  => tăng tốc 0.25x (throttle)
+  // Shift + ,  => giảm tốc 0.25x (throttle)
   // Shift + /  => bật/tắt auto speed (reset về defaultSpeed khi bật)
+  const throttledAdjustUp = throttle(() => adjustSpeed(0.25), 60);
+  const throttledAdjustDown = throttle(() => adjustSpeed(-0.25), 60);
+
   document.addEventListener("keydown", (e) => {
     if (!e.shiftKey) return; // chỉ xử lý khi giữ Shift
 
@@ -256,11 +249,11 @@
 
     switch (e.code) {
       case "Period": // phím .
-        adjustSpeed(0.25);
+        throttledAdjustUp();
         e.preventDefault();
         break;
       case "Comma": // phím ,
-        adjustSpeed(-0.25);
+        throttledAdjustDown();
         e.preventDefault();
         break;
       case "Slash": // phím /
