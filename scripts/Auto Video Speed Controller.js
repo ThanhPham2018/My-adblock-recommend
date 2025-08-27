@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.19
+// @version      1.20
 // @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+/)
 // @author       ThanhPN (mod by request)
 // @downloadURL     https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -15,7 +15,7 @@
   "use strict";
 
   // --- Biến trạng thái và cấu hình ---
-  let defaultSpeed = 1.75;
+  let defaultSpeed = 1.5;
   let isEnabled = true;
   const LISTENER_ATTRIBUTE = "data-speed-listener-added"; // Thuộc tính để đánh dấu listener đã được thêm
 
@@ -103,6 +103,9 @@
   // Bật/tắt điều khiển speed
   function toggleSpeedControl() {
     isEnabled = !isEnabled;
+    if (isEnabled) {
+      defaultSpeed = 1.5; // reset về defaultSpeed khi bật lại
+    }
     updateToggleButton();
     applySpeedToAllExistingVideos(); // Áp dụng trạng thái mới (speed hoặc 1x)
   }
@@ -242,8 +245,7 @@
   // --- Hotkeys ---
   // Shift + .  => tăng tốc 0.25x
   // Shift + ,  => giảm tốc 0.25x
-  // Shift + /  => bật/tắt auto speed
-  // Lưu ý: dùng e.code để ổn định giữa layout bàn phím, và bỏ qua khi đang gõ trong input/textarea/contenteditable
+  // Shift + /  => bật/tắt auto speed (reset về defaultSpeed khi bật)
   document.addEventListener("keydown", (e) => {
     if (!e.shiftKey) return; // chỉ xử lý khi giữ Shift
 
@@ -270,5 +272,4 @@
     }
   });
 
-  // Không cần setInterval(applySpeedToVideos, 2000) nữa
 })();
