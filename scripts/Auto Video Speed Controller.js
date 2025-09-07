@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.26
-// @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+/). Bản tối ưu hiệu năng (no setInterval, hotkeys throttle) + chống mất khi đổi URL (SPA) + UI giữa cạnh trái + fix YouTube autoplay next.
+// @version      1.27
+// @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+. x2 để toggle). Bản tối ưu hiệu năng (no setInterval, hotkeys throttle) + chống mất khi đổi URL (SPA) + UI giữa cạnh trái + fix YouTube autoplay next.
 // @author       ThanhPN (mod by request)
 // @downloadURL  https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
 // @updateURL    https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -278,6 +278,10 @@
   const throttledAdjustUp = throttle(() => adjustSpeed(0.25), 60);
   const throttledAdjustDown = throttle(() => adjustSpeed(-0.25), 60);
 
+  // Double-tap Shift+. để toggle; giữ nguyên tăng 0.25x cho lần nhấn đơn
+  let lastDotTime = 0;
+  let incOnLastDot = false; // đã tăng 0.25x ở lần nhấn trước (không repeat)
+
   document.addEventListener("keydown", (e) => {
     if (!e.shiftKey) return;
     const target = e.target || {};
@@ -286,14 +290,43 @@
     if (isEditable) return;
 
     switch (e.code) {
-      case "Period":
-        throttledAdjustUp(); e.preventDefault(); break;
+      case "Period": {
+        const now = Date.now();
+        // Nhấn lại nhanh (không giữ): toggle và hoàn tác tăng 0.25x trước đó (nếu có)
+        if (!e.repeat && now - lastDotTime < 300) {
+          if (incOnLastDot && isEnabled) {
+            // hoàn tác lần tăng trước khi toggle để không đổi tốc độ ngoài ý muốn
+            adjustSpeed(-0.25);
+          }
+          toggleSpeedControl();
+          lastDotTime = 0;
+          incOnLastDot = false;
+          e.preventDefault();
+          break;
+        }
+
+        if (e.repeat) {
+          // giữ phím: dùng throttle để tăng mượt
+          throttledAdjustUp();
+        } else {
+          // nhấn đơn: tăng ngay 0.25x
+          adjustSpeed(0.25);
+          lastDotTime = now;
+          incOnLastDot = true;
+          // hết cửa sổ double-tap thì bỏ cờ
+          setTimeout(() => { incOnLastDot = false; }, 320);
+        }
+        e.preventDefault();
+        break;
+      }
       case "Comma":
-        throttledAdjustDown(); e.preventDefault(); break;
-      case "Slash":
-        toggleSpeedControl(); e.preventDefault(); break;
+        throttledAdjustDown();
+        e.preventDefault();
+        break;
       default:
         break;
     }
   });
+
+  // (Loại bỏ hotkey Slash để toggle)
 })();
