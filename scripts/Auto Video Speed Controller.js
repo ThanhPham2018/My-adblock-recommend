@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.28
+// @version      1.29
 // @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+'). Bản tối ưu hiệu năng (no setInterval, hotkeys throttle) + chống mất khi đổi URL (SPA) + UI giữa cạnh trái + fix YouTube autoplay next.
 // @author       ThanhPN (mod by request)
 // @downloadURL  https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -47,9 +47,14 @@
       lastArgs = args;
       const remaining = wait - (now - last);
       if (remaining <= 0) {
-        last = now; fn.apply(this, lastArgs);
+        last = now;
+        fn.apply(this, lastArgs);
       } else if (!timer) {
-        timer = setTimeout(() => { timer = null; last = Date.now(); fn.apply(this, lastArgs); }, remaining);
+        timer = setTimeout(() => {
+          timer = null;
+          last = Date.now();
+          fn.apply(this, lastArgs);
+        }, remaining);
       }
     };
   }
@@ -65,7 +70,9 @@
   function handleRateChange(event) {
     const video = event.target;
     if (isEnabled && video.playbackRate !== defaultSpeed) {
-      setTimeout(() => { if (isEnabled) video.playbackRate = defaultSpeed; }, 0);
+      setTimeout(() => {
+        if (isEnabled) video.playbackRate = defaultSpeed;
+      }, 0);
     }
   }
 
@@ -116,11 +123,11 @@
 
   function createSpeedControl() {
     if (!document.body) return;
+
     const oldContainer = document.getElementById("speed-control-container");
     if (oldContainer && oldContainer.parentElement) oldContainer.parentElement.remove();
 
     const container = document.createElement("div");
-
     const controlContainer = document.createElement("div");
     controlContainer.id = "speed-control-container";
     controlContainer.style.cssText = "position: fixed; top: 0; left: 0; width: 0; height: 100vh; z-index: 9998;";
@@ -151,8 +158,10 @@
     panel.appendChild(toggleBtn);
     panel.appendChild(upBtn);
     panel.appendChild(downBtn);
+
     controlContainer.appendChild(showZone);
     controlContainer.appendChild(panel);
+
     container.appendChild(controlContainer);
     document.body.appendChild(container);
 
@@ -167,7 +176,6 @@
         speedControlElement.style.left = "10px";
       }
     });
-
     controlContainer.addEventListener("mouseleave", () => {
       speedControlElement.style.left = "-120px";
     });
@@ -181,7 +189,6 @@
 
   // --- Tự phục hồi UI/observer khi SPA thay trang/DOM ---
   let observer = null;
-
   function attachObserver() {
     if (observer) observer.disconnect();
     observer = new MutationObserver((mutationsList) => {
@@ -214,7 +221,12 @@
       }
       if (needVisibilityUpdate) scheduleVisibilityCheck();
     });
-    observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ["src"] });
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["src"],
+    });
   }
 
   function ensureUIAttached() {
@@ -235,11 +247,20 @@
       scheduleVisibilityCheck();
     });
   }
+
   (function patchHistoryForSpa() {
     const _push = history.pushState;
     const _replace = history.replaceState;
-    history.pushState = function (...args) { const r = _push.apply(this, args); onUrlChange(); return r; };
-    history.replaceState = function (...args) { const r = _replace.apply(this, args); onUrlChange(); return r; };
+    history.pushState = function (...args) {
+      const r = _push.apply(this, args);
+      onUrlChange();
+      return r;
+    };
+    history.replaceState = function (...args) {
+      const r = _replace.apply(this, args);
+      onUrlChange();
+      return r;
+    };
     window.addEventListener("popstate", onUrlChange, { passive: true });
     window.addEventListener("yt-navigate-finish", onUrlChange, true);
     window.addEventListener("yt-page-data-updated", onUrlChange, true);
@@ -252,6 +273,7 @@
     if (inited) return;
     if (!document.body) return;
     inited = true;
+
     createSpeedControl();
     applySpeedToAllExistingVideos();
     attachObserver();
@@ -269,7 +291,14 @@
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => { initOnce(); onUrlChange(); }, { once: true });
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+        initOnce();
+        onUrlChange();
+      },
+      { once: true }
+    );
   } else {
     initOnce();
   }
@@ -278,19 +307,28 @@
   const throttledAdjustUp = throttle(() => adjustSpeed(0.25), 60);
   const throttledAdjustDown = throttle(() => adjustSpeed(-0.25), 60);
 
-  // Shift+. tăng; Shift+, giảm; Shift+' toggle
+  // Shift+. tăng (hoặc bật nếu đang tắt); Shift+, giảm; Shift+' toggle
   document.addEventListener("keydown", (e) => {
     if (!e.shiftKey) return;
     const target = e.target || {};
     const tag = (target.tagName || "").toLowerCase();
-    const isEditable = target.isContentEditable || tag === "input" || tag === "textarea" || tag === "select";
+    const isEditable =
+      target.isContentEditable ||
+      tag === "input" ||
+      tag === "textarea" ||
+      tag === "select";
     if (isEditable) return;
 
     switch (e.code) {
-      case "Period": // Shift+.
-        throttledAdjustUp();
+      case "Period": { // Shift+.
+        if (!isEnabled) {
+          toggleSpeedControl(); // bật nếu đang tắt (về 1.75x theo logic hiện tại)
+        } else {
+          throttledAdjustUp(); // đang bật thì tăng +0.25x
+        }
         e.preventDefault();
         break;
+      }
       case "Comma": // Shift+,
         throttledAdjustDown();
         e.preventDefault();
