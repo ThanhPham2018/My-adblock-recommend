@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.29
-// @description  Tự động điều chỉnh tốc độ video và thêm controls + hotkeys (Shift+., Shift+,, Shift+'). Bản tối ưu hiệu năng (no setInterval, hotkeys throttle) + chống mất khi đổi URL (SPA) + UI giữa cạnh trái + fix YouTube autoplay next.
+// @version      1.30
+// @description  Tự động điều chỉnh tốc độ cho mọi HTML5 media (video + audio), và thêm controls + hotkeys (Shift+., Shift+,, Shift+'). Bản tối ưu hiệu năng (no setInterval, hotkeys throttle) + chống mất khi đổi URL (SPA) + UI giữa cạnh trái + fix YouTube autoplay next.
 // @author       ThanhPN (mod by request)
 // @downloadURL  https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
 // @updateURL    https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -17,11 +17,11 @@
   "use strict";
 
   // --- Trạng thái & cấu hình ---
-  let defaultSpeed = 1.75;
+  let defaultSpeed = 1.75;     // Giữ theo yêu cầu
   let isEnabled = true;
   const LISTENER_ATTRIBUTE = "data-speed-listener-added";
 
-  // --- Cache DOM ---
+  // --- Cache DOM (UI) ---
   let speedControlElement = null;
   let toggleSpeedButton = null;
   let speedUpButton = null;
@@ -59,37 +59,40 @@
     };
   }
 
-  // --- Video ---
-  function applySpeedToVideo(video) {
-    if (!video || video.hasAttribute(LISTENER_ATTRIBUTE)) return;
-    video.playbackRate = isEnabled ? defaultSpeed : 1;
-    video.addEventListener("ratechange", handleRateChange);
-    video.setAttribute(LISTENER_ATTRIBUTE, "true");
+  const isMediaEl = (el) => el instanceof HTMLMediaElement; // video hoặc audio
+
+  // --- Media ---
+  function applySpeedToMedia(media) {
+    if (!media || media.hasAttribute(LISTENER_ATTRIBUTE)) return;
+    media.playbackRate = isEnabled ? defaultSpeed : 1;
+    media.addEventListener("ratechange", handleRateChange);
+    media.setAttribute(LISTENER_ATTRIBUTE, "true");
   }
 
   function handleRateChange(event) {
-    const video = event.target;
-    if (isEnabled && video.playbackRate !== defaultSpeed) {
+    const media = event.target;
+    if (isEnabled && media.playbackRate !== defaultSpeed) {
+      // reset về tốc độ mặc định nếu bị trang can thiệp
       setTimeout(() => {
-        if (isEnabled) video.playbackRate = defaultSpeed;
+        if (isEnabled) media.playbackRate = defaultSpeed;
       }, 0);
     }
   }
 
-  function applySpeedToAllExistingVideos() {
-    document.querySelectorAll("video").forEach((video) => {
+  function applySpeedToAllExistingMediaInDocument(doc) {
+    doc.querySelectorAll("video, audio").forEach((media) => {
       const targetRate = isEnabled ? defaultSpeed : 1;
-      if (video.playbackRate !== targetRate) video.playbackRate = targetRate;
-      if (!video.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToVideo(video);
+      if (media.playbackRate !== targetRate) media.playbackRate = targetRate;
+      if (!media.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToMedia(media);
     });
   }
 
-  function applySpeedToActiveVideos() {
-    document.querySelectorAll("video").forEach((video) => {
+  function applySpeedToActiveMediaInDocument(doc) {
+    doc.querySelectorAll("video, audio").forEach((media) => {
       if (!isEnabled) return;
-      if (!video.paused || video.readyState > 0) {
-        if (video.playbackRate !== defaultSpeed) video.playbackRate = defaultSpeed;
-        if (!video.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToVideo(video);
+      if (!media.paused || media.readyState > 0) {
+        if (media.playbackRate !== defaultSpeed) media.playbackRate = defaultSpeed;
+        if (!media.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToMedia(media);
       }
     });
   }
@@ -105,20 +108,22 @@
     if (!isEnabled) return;
     defaultSpeed = Math.min(Math.max(defaultSpeed + change, 0.25), 16);
     updateToggleButton();
-    applySpeedToActiveVideos();
+    applySpeedToActiveMediaInDocument(document);
+    // không động tới iframe ở đây cho nhẹ; sẽ đồng bộ lại qua observer/URL hooks
   }
 
   function toggleSpeedControl() {
     isEnabled = !isEnabled;
     if (isEnabled) defaultSpeed = 1.75;
     updateToggleButton();
-    applySpeedToAllExistingVideos();
+    // Áp dụng cho tài liệu chính & các iframe same-origin
+    applySpeedEverywhere();
   }
 
   function checkAndToggleControlVisibility() {
     if (!speedControlElement) return;
-    const videosExist = document.querySelector("video") !== null;
-    speedControlElement.style.display = videosExist ? "flex" : "none";
+    const anyMedia = !!document.querySelector("video, audio");
+    speedControlElement.style.display = anyMedia ? "flex" : "none";
   }
 
   function createSpeedControl() {
@@ -172,6 +177,7 @@
     speedDownButton = downBtn;
 
     showZoneElement.addEventListener("mouseenter", () => {
+      // Hiện panel khi có media
       if (speedControlElement.style.display === "flex") {
         speedControlElement.style.left = "10px";
       }
@@ -184,49 +190,119 @@
     speedUpButton.onclick = () => adjustSpeed(0.25);
     speedDownButton.onclick = () => adjustSpeed(-0.25);
 
+    // Khi có media mới hoặc mất, observer sẽ gọi scheduleVisibilityCheck
     checkAndToggleControlVisibility();
   }
 
-  // --- Tự phục hồi UI/observer khi SPA thay trang/DOM ---
-  let observer = null;
-  function attachObserver() {
-    if (observer) observer.disconnect();
-    observer = new MutationObserver((mutationsList) => {
+  // --- Observer đa tài liệu (main + iframe same-origin) ---
+  const docObservers = new WeakMap(); // Document -> MutationObserver
+
+  function observeDocument(doc) {
+    if (!doc || docObservers.has(doc)) return;
+
+    const mo = new MutationObserver((mutationsList) => {
       let needVisibilityUpdate = false;
+
       for (const mutation of mutationsList) {
         if (mutation.type === "childList") {
           mutation.addedNodes.forEach((node) => {
-            if (node.nodeName === "VIDEO") {
-              applySpeedToVideo(node);
-              needVisibilityUpdate = true;
-            } else if (node.nodeType === Node.ELEMENT_NODE) {
-              node.querySelectorAll && node.querySelectorAll(`video:not([${LISTENER_ATTRIBUTE}])`).forEach(applySpeedToVideo);
-              if (node.querySelector && node.querySelector("video")) needVisibilityUpdate = true;
+            if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+            // Media trực tiếp
+            if (isMediaEl(node)) {
+              applySpeedToMedia(node);
+              needVisibilityUpdate = (doc === document);
+              return;
+            }
+
+            // Media trong cây con
+            if (node.querySelectorAll) {
+              node.querySelectorAll("video, audio").forEach(applySpeedToMedia);
+              if (doc === document && node.querySelector && node.querySelector("video, audio")) {
+                needVisibilityUpdate = true;
+              }
+            }
+
+            // Iframe same-origin
+            if (node.tagName === "IFRAME") {
+              hookIframe(node);
             }
           });
+
           mutation.removedNodes.forEach((node) => {
-            if (node.nodeName === "VIDEO" || (node.nodeType === Node.ELEMENT_NODE && node.querySelector && node.querySelector("video"))) {
-              needVisibilityUpdate = true;
+            if (doc === document) {
+              if (node.nodeName === "VIDEO" || node.nodeName === "AUDIO" ||
+                  (node.nodeType === Node.ELEMENT_NODE && node.querySelector && node.querySelector("video, audio"))) {
+                needVisibilityUpdate = true;
+              }
             }
           });
         }
-        if (mutation.type === "attributes" && mutation.target && mutation.target.nodeName === "VIDEO") {
-          const v = mutation.target;
-          if (isEnabled && v.playbackRate !== defaultSpeed) {
-            v.playbackRate = defaultSpeed;
+
+        if (mutation.type === "attributes") {
+          const t = mutation.target;
+          if (isMediaEl(t)) {
+            if (isEnabled && t.playbackRate !== defaultSpeed) {
+              t.playbackRate = defaultSpeed;
+            }
+            if (!t.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToMedia(t);
+            if (doc === document) needVisibilityUpdate = true;
           }
-          if (!v.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToVideo(v);
-          needVisibilityUpdate = true;
         }
       }
+
       if (needVisibilityUpdate) scheduleVisibilityCheck();
     });
-    observer.observe(document.documentElement, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ["src"],
+
+    try {
+      mo.observe(doc.documentElement || doc, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["src"],
+      });
+      docObservers.set(doc, mo);
+    } catch (e) {
+      // Bỏ qua nếu không thể observe
+    }
+
+    // Quét sẵn media & hook iframe hiện có
+    try {
+      applySpeedToAllExistingMediaInDocument(doc);
+      doc.querySelectorAll("iframe").forEach(hookIframe);
+    } catch (e) {}
+  }
+
+  function hookIframe(frame) {
+    // Chỉ xử lý iframe same-origin
+    try {
+      const doc = frame.contentDocument;
+      if (doc) {
+        // Observe tài liệu trong iframe
+        observeDocument(doc);
+
+        // Khi iframe reload, rehook
+        frame.addEventListener("load", () => {
+          try {
+            observeDocument(frame.contentDocument);
+          } catch (e) {}
+        }, { passive: true });
+      }
+    } catch (e) {
+      // cross-origin -> bỏ qua
+    }
+  }
+
+  function applySpeedEverywhere() {
+    // Main
+    applySpeedToAllExistingMediaInDocument(document);
+    // Iframe same-origin
+    document.querySelectorAll("iframe").forEach((f) => {
+      try {
+        if (f.contentDocument) applySpeedToAllExistingMediaInDocument(f.contentDocument);
+      } catch (e) {}
     });
+    scheduleVisibilityCheck();
   }
 
   function ensureUIAttached() {
@@ -236,15 +312,13 @@
       if (container && container.parentElement) container.parentElement.remove();
       createSpeedControl();
     }
-    if (!observer) attachObserver();
   }
 
   // --- Hook thay đổi URL (SPA) ---
   function onUrlChange() {
     raf(() => {
       ensureUIAttached();
-      applySpeedToAllExistingVideos();
-      scheduleVisibilityCheck();
+      applySpeedEverywhere();
     });
   }
 
@@ -262,6 +336,7 @@
       return r;
     };
     window.addEventListener("popstate", onUrlChange, { passive: true });
+    // Sự kiện đặc thù YouTube
     window.addEventListener("yt-navigate-finish", onUrlChange, true);
     window.addEventListener("yt-page-data-updated", onUrlChange, true);
     window.addEventListener("yt-player-updated", onUrlChange, true);
@@ -275,16 +350,16 @@
     inited = true;
 
     createSpeedControl();
-    applySpeedToAllExistingVideos();
-    attachObserver();
+    // Quan sát tài liệu chính + quét media hiện có
+    observeDocument(document);
 
     const mediaReadyHandler = (e) => {
-      const v = e.target;
-      if (!v || v.nodeName !== "VIDEO") return;
-      if (isEnabled && v.playbackRate !== defaultSpeed) {
-        v.playbackRate = defaultSpeed;
+      const el = e.target;
+      if (!el || !isMediaEl(el)) return;
+      if (isEnabled && el.playbackRate !== defaultSpeed) {
+        el.playbackRate = defaultSpeed;
       }
-      if (!v.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToVideo(v);
+      if (!el.hasAttribute(LISTENER_ATTRIBUTE)) applySpeedToMedia(el);
     };
     document.addEventListener("loadedmetadata", mediaReadyHandler, true);
     document.addEventListener("playing", mediaReadyHandler, true);
@@ -322,7 +397,7 @@
     switch (e.code) {
       case "Period": { // Shift+.
         if (!isEnabled) {
-          toggleSpeedControl(); // bật nếu đang tắt (về 1.75x theo logic hiện tại)
+          toggleSpeedControl(); // bật nếu đang tắt (về 1.75x)
         } else {
           throttledAdjustUp(); // đang bật thì tăng +0.25x
         }
@@ -342,5 +417,5 @@
     }
   });
 
-  // (Bỏ hẳn hotkey Slash và cơ chế double-tap)
+  // (Không dùng Slash / double-tap)
 })();
