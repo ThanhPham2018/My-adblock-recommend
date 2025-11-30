@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Video Speed Controller
 // @namespace    http://tampermonkey.net/
-// @version      1.30
+// @version      1.31
 // @description  Tự động điều chỉnh tốc độ cho mọi HTML5 media (video + audio), và thêm controls + hotkeys (Shift+., Shift+,, Shift+'). Bản tối ưu hiệu năng (no setInterval, hotkeys throttle) + chống mất khi đổi URL (SPA) + UI giữa cạnh trái + fix YouTube autoplay next.
 // @author       ThanhPN (mod by request)
 // @downloadURL  https://raw.githubusercontent.com/ThanhPham2018/My-adblock-recommend/refs/heads/main/scripts/Auto%20Video%20Speed%20Controller.js
@@ -17,7 +17,7 @@
   "use strict";
 
   // --- Trạng thái & cấu hình ---
-  let defaultSpeed = 1.75;     // Giữ theo yêu cầu
+  let defaultSpeed = 1.5;     // Giữ theo yêu cầu
   let isEnabled = true;
   const LISTENER_ATTRIBUTE = "data-speed-listener-added";
 
